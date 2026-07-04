@@ -9,7 +9,7 @@ load_dotenv()
 username = os.getenv("MONGO_USERNAME")
 password = os.getenv("MONGO_PASSWORD")
 
-client = MongoClient(f"mongodb+srv://{username}:{username}@cluster0.tqm8j4u.mongodb.net/?appName=Cluster0")
+client = MongoClient(f"mongodb+srv://{username}:{password}@cluster0.tqm8j4u.mongodb.net/?appName=Cluster0")
 parser = ResumeDataParser()
 resume_service = ResumeService()
 
