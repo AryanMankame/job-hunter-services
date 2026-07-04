@@ -4,6 +4,7 @@ from ResumeService import ResumeService
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
+from helpers import verify_correct_email_format, ResumeParsingException
 load_dotenv()
 username = os.getenv("MONGO_USERNAME")
 password = os.getenv("MONGO_PASSWORD")
@@ -29,8 +30,13 @@ async def resume_upload(file: UploadFile,email: str = Form(...)):
         raise HTTPException(400, "Invalid email format")
     try:
         resume_text = resume_service.get_text_from_pdf(file_bytes)
+        if not resume_text.strip():
+            print(f"Extracted text length: {resume_text.strip()}")
+            raise ResumeParsingException(422, "Unable to extract text from the PDF. Please ensure the PDF is not a scanned image and contains selectable text.")
     except ValueError as e:
         raise HTTPException(422, str(e))
+    except ResumeParsingException as e:
+        raise HTTPException(e.args[0], e.args[1])
     except Exception as e:
         # log e with your traceability callback from before
         raise HTTPException(502, "Failed to process resume, please try again")

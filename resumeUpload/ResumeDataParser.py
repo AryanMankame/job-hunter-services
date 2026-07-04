@@ -9,7 +9,6 @@ from datetime import date
 dotenv.load_dotenv()
 from pydantic import BaseModel, Field
 from typing import Optional
-from helpers import verify_correct_email_format
 
 import logging
 import time
