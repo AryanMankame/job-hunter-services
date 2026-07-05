@@ -1,0 +1,80 @@
+{
+    "full_name": "Sarvesh Parab",
+    "email": "sarveshparab602@gmail.com",
+    "phone": "+91 7977737097",
+    "linkedin_url": null,
+    "github_url": null,
+    "location": "Samata Nagar, Kandiwali East, Mumbai - 400101",
+    "summary": null,
+    "skills": [
+        "React",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "MongoDB",
+        "React-Native",
+        "Node.js"
+    ],
+    "work_experience": [
+        {
+            "company": "Integreon Managed Solutions",
+            "role": "Technical Support Analyst",
+            "duration": "Jun 2018 - Jul 2019",
+            "duration_months": 13,
+            "responsibilities": [
+                "To work alongside colleagues within the IT Department on support, development and project work where directed.",
+                "Manage vendors providing Network Cabling installation services.",
+                "Develop technical expertise in various Workday technologies, including but not limited to, user interface, authentication and system performance."
+            ],
+            "is_current": false
+        }
+    ],
+    "education": [
+        {
+            "institution": "Nirmala Memorial Foundation College, Mumbai",
+            "degree": "BSC in Information and Technology",
+            "graduation_year": 2018,
+            "cgpa_or_percentage": null
+        }
+    ],
+    "projects": [
+        {
+            "name": "Sell Solution",
+            "description": "An e-commerce portal that deals with selling multiple electronic gadget based products. Integrated Stripe for payment and implemented the checkout process in addition to developing reports for orders and created user walls to display the products added by the users, list of their followers and their posts, also designed the User Interface.",
+            "tech_stack": []
+        },
+        {
+            "name": "iMaze",
+            "description": "Worked in a team of four students to build a marble maze game, where the user aims to roll a marble through a maze within the time limit to reach the end, avoiding obstacles and collecting items along the way. On-boarded more than 5000 students by direct marketing in 10 colleges in one month.",
+            "tech_stack": []
+        },
+        {
+            "name": "Lyrics-Finder",
+            "description": "An online lyrics finder web application to find lyrics of any song across the world. Used the musixmatch API to get the tracks and designed a friendly User Interface to interact with the app.",
+            "tech_stack": [
+                "Musixmatch API"
+            ]
+        },
+        {
+            "name": "JavaLearn",
+            "description": "JavaLearn is a desktop application based on 3 tier architecture in which the E-Learning system is implemented. Created using Java Language with Swing Components, HTML, CSS, and MySQL server for Backend.",
+            "tech_stack": [
+                "Java",
+                "Swing",
+                "HTML",
+                "CSS",
+                "MySQL"
+            ]
+        },
+        {
+            "name": "React - Todolist app",
+            "description": "An online todo app where users can add todos with different priority levels. Designed the user interface easy and simple for better interaction.",
+            "tech_stack": [
+                "React"
+            ]
+        }
+    ],
+    "certifications": [],
+    "languages_spoken": [],
+    "total_experience_months": 13
+}

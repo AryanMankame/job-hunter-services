@@ -1,0 +1,98 @@
+{
+    "full_name": "Partha Pratim Chatterjee",
+    "email": "pchatter@andrew.cmu.edu",
+    "phone": "928-409-2740",
+    "linkedin_url": null,
+    "github_url": "https://github.com/yourgithub",
+    "location": "5829 Hobart Street, Pittsburgh, PA 15213",
+    "summary": null,
+    "skills": [
+        "Python",
+        "C",
+        "C++",
+        "PHP",
+        "Java",
+        "HTML/CSS",
+        "Javascript",
+        "jQuery",
+        "NodeJS",
+        "AWS",
+        "Jenkins"
+    ],
+    "work_experience": [
+        {
+            "company": "Tata Consultancy Services Limited",
+            "role": "Technology Analyst",
+            "duration": "June 2016 - May 2017",
+            "duration_months": 11,
+            "responsibilities": [
+                "Designed and built the first version of infrastructure codebase which built the entire environment of SDLC at runtime. This reduced the development teams' monthly expenses on AWS servers by 100 thousand dollars.",
+                "Designed and a centralized build strategy for all the software components of our client. The monolithic design of our build module brought new business to TCS."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "Tata Consultancy Services Limited",
+            "role": "Technology Analyst",
+            "duration": "July 2015 - June 2016",
+            "duration_months": 11,
+            "responsibilities": [
+                "Built a continuous delivery model for my client's Development Team. The incremental development method reduced three-man days of development time on a 14-day sprint.",
+                "Created Production like testing environments in AWS Cloud for sprint teams to enhance test-driven development. The new process promoted quality development culture. The number of defects were reduced by one-fifth. The time saved in fixing bugs increased the development time by 15."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "Tata Consultancy Services Limited",
+            "role": "Systems Engineer",
+            "duration": "March 2012 - July 2015",
+            "duration_months": 40,
+            "responsibilities": [
+                "Developed a comprehensive shell script that remotely monitored the health of all the production services. The script visualized the current state of the different production services in a dashboard. The transparent report dashboard decreased production outage to one two incidents in a financial quarter.",
+                "Encapsulated the build scripts in a Jenkins automation server. The user-friendly Jenkins GUI empowered the developers to trigger new builds themselves. The DevOps effort saved was 2 man-days every week."
+            ],
+            "is_current": false
+        }
+    ],
+    "education": [
+        {
+            "institution": "Carnegie Mellon University",
+            "degree": "Master of Information Systems Management",
+            "graduation_year": 2019,
+            "cgpa_or_percentage": null
+        },
+        {
+            "institution": "West Bengal University of Technology",
+            "degree": "Bachelor of Technology in Applied Electronics and Instrumentation Engineering",
+            "graduation_year": 2011,
+            "cgpa_or_percentage": null
+        }
+    ],
+    "projects": [
+        {
+            "name": "Amazing Project 1",
+            "description": "Ran custom Minecraft mods on CentOS and Debian servers. Reverse engineered obfuscated Java using a decompiler and reflection.",
+            "tech_stack": [
+                "CentOS",
+                "Debian",
+                "Java"
+            ]
+        },
+        {
+            "name": "Amazing Project 2",
+            "description": "Began a group to create the first 36 hour student-run hackathon ever held at Illinois. Led 50 staff to raise $175,000 for HackIllinois, managing relationships with 60+ sponsors. Plan events to increase social interaction among ACM members, as well as events to foster the spirit of computer science at Illinois.",
+            "tech_stack": []
+        },
+        {
+            "name": "Amazing Project 3",
+            "description": "Assist in recruiting potential and admitted students to the UIUC computer science program. Attend information sessions, admitted student Q&A's, and student lunches to generate interest in the Illinois Computer Science department.",
+            "tech_stack": []
+        }
+    ],
+    "certifications": [],
+    "languages_spoken": [
+        "Gibberish",
+        "Nonsense"
+    ],
+    "total_experience_months": 62
+}

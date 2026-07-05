@@ -1,0 +1,46 @@
+AlgoUniversity Student
+♂phone+91 9876543210 /envel⌢peyouremail@gmail.com /linkedinLinkedIn /githubGithub
+Education
+National Institute of T echnology , Jamshedpur 2021 - 2025
+B.Tech in Computer Science & Engineering 8.3/10 CGPA
+Work Experience
+AlgoUniversity (backed by Y-Combinator) May 2024 – July 2023
+Software Development Extern Remote
+• ——— Hidden Project Description ———
+• ——— Hidden Project Description ———
+• MERN stack used: React.js for UI, Node.js/Express.js for backend, MongoDB for storage.
+• ——— Hidden Project Description ———
+• ——— Hidden Project Description ———
+• ——— Hidden Project Description ———
+• Got mentorship of senior engineers from Google London, Apple, Bytedance Singaporeand Alphagrep
+Singapore, I learned real word software development and learned about scalability.
+Projects
+AlgoUniversity Project: A Level-4 Project with industry-level tech stacks. Source Code
+• A Level 4 projectis a scalable project deployed in a production setting on a cloud platform like A WS, GCP , or
+Azure.
+• It should be capable of handling a load of up to X+ simultaneous usersusing Horizontal Scaling.
+• One should have a deep understanding of System Design Principlesto build a Level 4 project.
+• Building a Level-4 project helps you to land directly in the top 0.1%of India.
+Technical Skills
+Languages: Python, Java, C++, JavaScript
+Backend: Django, Node.js, Express.js
+F rontend: React, TailwindCSS, HTML, CSS, Bootstrap
+Clouds & Databases: A WS, PostgreSQL, MongoDB
+W eb T echnologies: Docker, Socket.IO, Redis
+Developer T ools: Postman, VS Code, GitHub, Xcode
+Honours and Awards
+Accelerator Programming Camp March 2024 – present
+Batch of 2024 AlgoUniversity (backed by Y-Combinator)
+• Got selected being in top 1.4% out of 40,000students who applied, got mentorship under the seniors engineers of
+Apple, Google, Grab Singapore and Alphagrep Singapore.
+• Learned how to build Scalable systems, deployments and gained industry-level work experience.
+Graphs camp by Codeforces Master Dec 2023
+• I have been selected out of 80,000 students from Indiaas a mentee for graphs camp by Codeforces Master and
+learned 17+ advanced problem solving techniques in graphs. Solved 3 super hard problems on the topic shortest paths
+and got featured in the Hall of F ame.
+Algorithmic Competitions/Achievements
+• Solved 250+ super hardDSA problems from Rapid Growth Problemset, building problem solving skills.
+• Rated Candidate Masteron Codeforces with Rating 1960 (Top 300 in India) .
+• Secured Rank 1/400+participants in the flagship Coderush 2024 Coding Challenge.
+• Ranked in top 1 percentilein 30+ Coding Test Simulations during InterviewPrep in Accelerator Camp .
+• W on 3+ coding contestsin the Accelerator Camp beating top students of IITs/NITs and IIITs.

@@ -1,0 +1,77 @@
+AKSHAY V AISHNA V
+C-101, Dreamland Apartment, Backbone Park, B/H Balaji Hall, Rajkot-360004, Gujarat
++91 720 393 7889 ⋄ vaishnavakshay007@gmail.com
+EDUCATION
+Bachelor of Engineering in Mechanical Engineering August 2012 - May 2016
+Sanjaybhai Rajguru College of Engineering, Rajkot
+Gujarat Technological University, CGPA: 8.38/10.00
+HSC, Class XII June 2010 - April 2012
+Shree S.G. Dholakiya Higher Secondary School, Rajkot, Gujarat, 57%
+SSC, Class X March 2009 - March 2010
+Shree S.G. Dholakiya Secondary School, Rajkot, Gujarat, 83%
+SKILLS AND INTERESTS
+Interests Product Development, Design, Automobile, CAD/CAE, Finite Element Analysis,
+Optimization, Fluid Mechanics, Robotics, Modeling and Simulation
+Design Software Basic AUTOCAD, CATIA V5, ANSYS (Static Structural, Transient Structural,
+Static Thermal, Transient Thermal, Harmonic Response, Model analysis, Acoustic, Fluent),
+OptimumLap, MATLAB
+PROJECTS
+Design Optimization of Hydraulic Press Plate using Finite Element
+Analysis January 2016 - April 2016
+Major Project as a part of curriculum
+· An Industrial Deﬁned Project in collaboration with Incredible Machines, Rajkot
+· Designed and performed an FEA analysis of the plates of Hydraulic machine with the capacity of 250-ton
+· Optimization in terms of design and material reduction, leading to cost eﬀectiveness, considering minimum
+deformation of plates during operation
+Mathematical Modeling and Analysis of a Hydro-pneumatic Suspension
+Column of a Car July 2015 - October 2015
+Minor Project as a part of curriculum
+· Modeled a 2-DOF system considering sprung and unsprung mass of the vehicle
+· Performed sensitivity analysis to minimize the displacement of sprung and unsprung mass caused by vehicle hitting
+a bump using Transfer Function approach
+· The settling time and displacement of the system were decreased using Hydro-pneumatic suspension system
+Design and Thermal analysis of Disk Brake Rotor using ANSYS March 2016
+GT Motorsports,a Formula Student Team of GTU
+· Applied Energy Equation to calculate theoretical data for the input of simulation
+· Devised boundary conditions for modeling the system by calculating including Heat power and Heat ﬂux
+· A Static thermal analysis in ANSYS Workbench using real time boundary conditions to obtain temperature
+distribution of Brake Rotor
+Design, Development and Analysis of Exhaust System and Muﬄer assembly Sept 2015 - Jan 2016
+GT Motorsports,a Formula Student Team of GTU
+· Design and Development of complete muﬄer assembly for the reduction of noise under 110 dBC as per the rulebook
+· Modeling and Acoustics analysis of muﬄer assembly in ANSYS to determine the Transmission Loss
+· A CFD analysis of Exhaust Manifold using ANSYS Fluent to optimize the exhaust gas ﬂow
+RESEARCH PUBLICATION
+Akshay Vaishnav, Path Lathiya, Mohit Sarvaiya”Design Optimization of Hydraulic Press Plate using Finite
+Element Analysis ”Vol. 6 - Issue 5, International Journal of Engineering Research and Applications (IJERA),
+ISSN: 2248-9622 May 2016
+INTERNSHIP/TRAININGS
+Automotive Industry Simulation Internship,
+Expertshub,Sinhgad Institute of Engineering, Pune June 2015
+Machining and Quality Control of Forged Connecting Rods ,
+Amul Group of Industries, Rajkot February 2015
+POSITION OF RESPONSIBILITY
+CAE and Powertrain Lead, Formula SAE August 2015 - Present
+GT Motorsports,a Formula Student Team of GTU
+· Devised the design objectives and validation of designs through simulations and testings
+· Concentrated on real time simulation of Exhaust System and the noise reduction of Exhaust system
+· Part of core Design group in the team helping with various design decisions
+· Performed numerous simulations of various components of the car in the area of FEA and CFD segments with
+documentations
+Head coordinator of Mechanical section at Robotics club July 2015 - May 2016
+Sanjaybhai Rajguru College of Engineering
+· A college level Robotics club established by students with the aim of learning and professional skill development
+among students and peers
+· Lead in Mechanical work of Robotics club, working mostly with CAD and Hardware systems
+· Team leader and active member working to develop various robots of diﬀerent concepts and conﬁgurations
+EXTRA-CIRRUCULAR
+• STTP on Life Long Research under TEQIP-II, SVNIT, Surat February 2016
+• Participated in Formula Student India, An International FSAE competition,
+Secured 9th rank overall & 4th in Endurance January 2016
+• Seminar on Introduction to Robotics and Arduino Programming , SRCOE,Rajkot July 2015
+• Junkyard, BRIZINGER’15, a National Level Techfest, GEC, Rajkot March-2015
+• Seminar on Rapid Prototyping, COGNIZANCE 2K14, a National Level Technical Festival,
+CSPIT, Charotar September-2014
+• Rise of Machine, PRAKARSH 9.0, a National Level Technical Symposium, SVIT, Vasad March-2014
+DECLARATION
+I hereby declare that all the details furnished above are true to the best of my knowledge and belief.

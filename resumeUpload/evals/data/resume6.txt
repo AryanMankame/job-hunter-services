@@ -1,0 +1,101 @@
+Clément Rodrigues
+www.linkedin.com/in/ClementRodrigues
+clem.rodrigues@gmail.com | 647.545.6008
+EDUCATION
+ICAM
+(Institut Catholique d’Arts et Métiers)
+MENG - MECHANICAL & CONTROLS
+Sep 2011 - Sep 2014 | T oulouse, FR
+UNIVERSITÉ PAUL SABATIER
+DUT - MECHANICAL & AEROSPACE
+Sep 2009 - Jun 2011 | T oulouse, FR
+L YCÉE VICTOR HUGO
+A LEVELS - SCIENCES
+Sep 2006 - Jun 2009 | T oulouse, FR
+COURSEWORK
+MASTERS
+Applied Mathematics
+Thermodynamics
+Material Properties
+Finite Element Analysis
+Controls
+Industrial Process Optimization
+Project Management
+DUT
+(2 year degree)
+Aerospace Sciences
+Material and Processes
+Non-destructive Control
+Structural Analysis
+Manufacturing
+SKILLS
+COMPETENCIES
+Dynamic Simulation
+Mechanical Design
+Project Management
+Failure Assessment
+SOFTWARE
+Engineering:
+Catia • Adams • Abaqus • Matlab
+Programming:
+C • VBA
+LANGUAGES
+French • Mother tongue
+English • Fully Fluent
+Italian • Intermediate
+German • Beginner
+HOBBIES/INTERESTS
+Rugby (13 years playing)
+Diving (Freediver lvl 2 & Scuba diver lvl 1)
+Aerospace
+Traveling
+INDUSTRY EXPERIENCE
+SAFRAN MESSIER-BUGATTI-DOWTY | PERFORMANCE ENGINEER
+Oct 2014 – Oct 2016 | V.I.E. Contract | T oronto, ON, Canada
+• Carried out T axiand Dynamic Braking dynamic simulations as part of the
+Bombardier Global 7000/8000 performance assessment.
+• Re-designed the Adams Shimmy model with ﬂexible bodies and insured its
+ﬁdelity through a modal frequency response analysis and a stiffness study.
+• Harmonized performance methods across UK, France and Canada by writing
+the ﬁrst Adams model descriptions for North-American aircraft programs.
+AIRBUS | APPRENTICE MECHANICAL ENGINEER
+Sep 2011 – Sep 2014 | T oulouse, France
+• Performed weight saving and systems optimization studies to meet the
+A330NEO requirements, which involved modifying ﬂight controls as well as
+revising existing mechanical systems.
+• Modiﬁed fuel and hydraulic systems within the A330 center tank by
+improving electrical continuity in order to avoid any static discharge.
+• Implemented electronic ﬂight bags (EFB) for A330, which required the
+modiﬁcation of the cockpit layout while taking the pilots requirements into
+account.
+Jun 2012 – Sep 2012 | Filton, United Kingdom
+• Designed A320neo mechanical and electrical systems at the wing/fuselage
+and wing/pylon interfaces.
+• Assessed electrical harnesses compliance with regards to engine ﬁre risks.
+AVIO | DESIGN INTERN
+Apr 2011 – Jun 2011 | Colleferro, Italy
+• Designed and modeled the roll generator for Vega launcher, including the
+nozzles, pipes and propellant ﬂow optimization.
+• Achieved several repairs on Ariane 5 boosters and implemented them while
+they were in production.
+DESIGN EXPERIENCE
+SPACEX | INDUSTRY ADVISOR FOR RYERSON'S HYPERLOOP TEAM
+Aug 2015 – Present | T oronto, ON, Canada
+Responsible for design validation and performance analysis of the Hyperloop
+Deployable Wheel System developed for the Hyperloop Competition.
+• Winner of the Subsystem Innovation Award by SpaceX during the
+competition ﬁnals in T exas(124 Universities, more than 1000 students).
+• Design patent pending with Messier-Bugatti-Dowty, our main partner.
+ICAM MATERIAL LAB | SCIENTIFIC MEMOIR
+Sep 2013 – Feb 2014 | T oulouse, France
+Performed corrosion research in support of my Masters’ Degree
+• Performed a failure assessment on a boiler affected by corrosion to settle a
+litigation between the manufacturer and the customer.
+• Studied corrosion between carbon ﬁber composite and treated aluminium
+on behalf of Ratier Figeac, a subsidiary of UTC Aerospace Systems.
+ICAM | HEAD OF R&T FOR THE RESEARCH AND INDUSTRIAL DAY
+Apr 2012 – Apr 2013 | T oulouse, France
+Managed 26 people during one year in order to organize the Research and
+Industrial Day, a one day conference about the energy challenge within the
+embedded systems, involving students, industry professionals and scientists.
+1

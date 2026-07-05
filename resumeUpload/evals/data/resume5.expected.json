@@ -1,0 +1,68 @@
+{
+    "full_name": "AlgoUniversity Student",
+    "email": "youremail@gmail.com",
+    "phone": "+91 9876543210",
+    "linkedin_url": "https://linkedin.com/in/algouniversity",
+    "github_url": "https://github.com/algouniversity",
+    "location": null,
+    "summary": null,
+    "skills": [
+        "Python",
+        "Java",
+        "C++",
+        "JavaScript",
+        "Django",
+        "Node.js",
+        "Express.js",
+        "React",
+        "TailwindCSS",
+        "HTML",
+        "CSS",
+        "Bootstrap",
+        "AWS",
+        "PostgreSQL",
+        "MongoDB",
+        "Docker",
+        "Socket.IO",
+        "Redis",
+        "Postman",
+        "VS Code",
+        "GitHub",
+        "Xcode"
+    ],
+    "work_experience": [
+        {
+            "company": "AlgoUniversity (backed by Y-Combinator)",
+            "role": "Software Development Extern",
+            "duration": "May 2024 - July 2023",
+            "duration_months": null,
+            "responsibilities": [
+                "MERN stack used: React.js for UI, Node.js/Express.js for backend, MongoDB for storage.",
+                "Got mentorship of senior engineers from Google London, Apple, Bytedance Singapore and Alphagrep Singapore, I learned real word software development and learned about scalability."
+            ],
+            "is_current": false
+        }
+    ],
+    "education": [
+        {
+            "institution": "National Institute of Technology, Jamshedpur",
+            "degree": "B.Tech in Computer Science & Engineering",
+            "graduation_year": 2025,
+            "cgpa_or_percentage": "8.3/10 CGPA"
+        }
+    ],
+    "projects": [
+        {
+            "name": "AlgoUniversity Project",
+            "description": "A Level-4 Project with industry-level tech stacks. A Level 4 project is a scalable project deployed in a production setting on a cloud platform like AWS, GCP, or Azure. It should be capable of handling a load of up to X+ simultaneous users using Horizontal Scaling. One should have a deep understanding of System Design Principles to build a Level 4 project.",
+            "tech_stack": [
+                "AWS",
+                "GCP",
+                "Azure"
+            ]
+        }
+    ],
+    "certifications": [],
+    "languages_spoken": [],
+    "total_experience_months": null
+}

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resume-upload"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+dependencies = [
+    "langchain-openai",
+    "langchain-nvidia-ai-endpoints",
+    "langchain-core",
+    "pydantic",
+    "pypdf",
+    "python-dotenv",
+    "pandas",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["resumeUpload*"]

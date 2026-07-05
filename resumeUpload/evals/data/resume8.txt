@@ -1,0 +1,50 @@
+Dhruba Chakraborty
+Birth January 16, 1995
+Address Uniliver Building, Elahi 8B, Surma, Akhalia, Sylhet.
+Phone +8801760954793
+Mail dhrubamuk@gmail.com
+OBJECTIVE
+Seeking a career in IT and technology oriented industry to utilize my knowledge, skill, adaptability and
+team-work.
+EDUCATION
+B.Sc in Engineering 2013-2017
+Department of Computer Science and Engineering
+Shahjalal University of Science and Technology, Sylhet
+Completed 4th year 1st semester
+CGPA: 3.10(4.00)
+Higher Secondary Certiﬁcate 2012
+Govt Hazi Md. Mohsin Colege,Chittagong
+Obtained GPA : 5.00 (scale 5.00)
+Secondary School Certiﬁcate 2010
+J B High School, Mirsarai, Chittagong.
+Obtained GPA: 5.00 (scale 5.00)
+SKILLS
+• Languages : C, C++, Java, MATLAB, PHP, HTML, CSS, Javascript
+• Web Technologies: PHP, Laravel
+• Database : Oracle , MySQL, MongoDB
+• Tools : Netbeans , CodeBlocks , MATLAB
+• Algorithm, Data Structure
+• Competitive Programming
+PROJECTS
+• Mukto Shikkha, built a knowledge sharing platform for school and college students, where
+they can share questions and problems, answer them, create and give examinations. Platform:
+PHP(laravel). Team Member: Dhruba Chakraborty, Mithun Das.
+• Graph Plotter, java application, which plots graphs and chart from equation.
+• Crazy Foody, an arcade game made with Unity game Engine. Language: C ˙Team member:
+Dhruba Chakraborty, Ranit Deb Nath.
+• Hotel Management System, a PHP web application for hotel management. Team Member:
+Dhruba Chakraborty, Mithun Das
+• Network Monitor, a C# application which measures upload download speed.
+• Perspective Miner, an application which make a sentimental analysis on Bangladesh
+depending on international newspapers.
+• Event Scheduler, a count down scheduler system for upcoming events and deadline.
+Platform: PHP(laravel). Team Members: Dhruba Chakraborty, Mahmudun Nobi Kakon.
+• Shop Management System, a java(NoSQL) application for management of a shop.
+• Bangla Optical character Recognition(on-going), building a labeling system for bangla
+OCR. Ongoing thesis works for ﬁnal year research project. Team Members: Dhruba Chakraborty,
+Asif Muhaimen Saumik.
+EXPERIENCES
+• Problem-solving experience for 2 years, 250 problems in diﬀerent online judge
+sites like UVA, LightOJ, Codeforces, CodeMarshal
+• Participant at EATL Mobile App Development Project-2015
+• A former member at SUST CSE Carnival 2015 organising committee

@@ -1,0 +1,2 @@
+filename,overall_score,identity_score,skills_f1_score,skills_recall,skills_precision,work_experience_score,education_score,projects_score,total_experience_months_match,hallucination_detected,hallucination_count,error
+resume1.expected.json,54.86765127845226,76.47058823529413,83.33333333333334,0.8333333333333334,0.8333333333333334,65.81172253847775,100.0,69.86879614948144,False,True,4,

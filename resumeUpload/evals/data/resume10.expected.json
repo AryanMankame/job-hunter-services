@@ -1,0 +1,99 @@
+{
+    "full_name": "Vidushi Wahal",
+    "email": "vidushi22@gmail.com",
+    "phone": "+91-9811405837",
+    "linkedin_url": null,
+    "github_url": null,
+    "location": null,
+    "summary": "6+ years of diverse experience in Information Technology with emphasis on Software Quality Assurance (Automation and Manual Testing) for various domains like insurance, e-commerce, ERP. Involved in all phases of the SDLC and STLC, including requirements gathering, risk analysis, test planning, test estimation, scheduling, test execution, defect tracking, and reporting. End to end test delivery experience starting from initiation through to final test delivery using Agile methodology. Experience in testing methodologies like functional, non-functional, integration, regression, system, user acceptance testing (UAT), and risk based testing. Specialization in designing Automation Frameworks for Functional testing and Regression testing activities in CodedUI C# and Selenium (C#/Java), along with SOAPUI for API testing. Experience in testing and analyzing tools like Google Cloud Platform, Microsoft Test Manager, Emulators, Simulators for mobile testing.",
+    "skills": [
+        "C#",
+        "Java",
+        "Javascript",
+        "SQL",
+        "Groovy",
+        "Selenium",
+        "SOAPUI",
+        "CodedUI",
+        "MongoDB",
+        "Google Cloud Platform",
+        "Microsoft Test Manager",
+        "JIRA",
+        "TestNG",
+        "QTest",
+        "TFS",
+        "Visual Studio",
+        "Telerik Mock",
+        "BrowserStack"
+    ],
+    "work_experience": [
+        {
+            "company": "G4S Technologies",
+            "role": "Senior QA Engineer",
+            "duration": "Oct 2016 - Present",
+            "duration_months": 117,
+            "responsibilities": [
+                "Project: Javelin - G4S End To End ERP Business Application.",
+                "Working to form testing strategies and approach, thereby, ensuring end to end application testing along with daily regression and reporting to the key stakeholders for weekly production releases.",
+                "Working closely with BA and PFOs to understand the requirement which further leads to creation of Test Scenarios and Test Cases.",
+                "Using SOAP UI and Selenium with Java and MongoDB for web applications.",
+                "Received Silver Award (2018) and a Bronze award (2018) for ensuring quality product delivery and for contribution in all version deliverable. Received multiple awards for day-night support for release of another country (2019)."
+            ],
+            "is_current": true
+        },
+        {
+            "company": "On Demand Agility Software Solutions",
+            "role": "Senior Software Engineer",
+            "duration": "Jun 2014 - Oct 2016",
+            "duration_months": 28,
+            "responsibilities": [
+                "Project: www.horizonhobby.com, www.forcerc.com - E-commerce.",
+                "Designing of Automation framework by evaluating different approaches for the e-commerce project which also includes reporting.",
+                "Managing a team of 3 ensuring all development tasks meet quality criteria through test planning, test execution, quality assurance and issue tracking.",
+                "Creating automated test cases using CodedUI and C# for HorizonHobby.com and Selenium with C# for ForceRC.com.",
+                "Testing of the e-commerce website on mobile using BrowserStack as emulator.",
+                "Using cross-site scripting in order to test security.",
+                "Providing training on frameworks, CodedUI and C# language for automation of test cases to new QA members and freshers."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "Infogain India Pvt. Ltd.",
+            "role": "Software Engineer",
+            "duration": "Jan 2013 - Jun 2014",
+            "duration_months": 17,
+            "responsibilities": [
+                "Project: Decision Point (a Mitchell Product) - Insurance.",
+                "Creating scenario based automated test cases using Coded UI with C Sharp.",
+                "Automating the existing manual test assets and providing better approach for automation framework. Actively involved in automation code review on daily basis. Involved in Test Impact Analysis on weekly basis.",
+                "Conducting Regression Testing, failure analysis and reporting via MTM.",
+                "Writing Unit Test cases using Telerik JustMock framework; writing Integration test cases. Code Coverage Analysis and Code Metrics Analysis."
+            ],
+            "is_current": false
+        }
+    ],
+    "education": [
+        {
+            "institution": "Apeejay College Of Engineering, Gurgaon, Haryana",
+            "degree": "Bachelor of Technology in IT",
+            "graduation_year": 2012,
+            "cgpa_or_percentage": "67%"
+        },
+        {
+            "institution": "Holy Child Auxilium Vasant Vihar, Delhi",
+            "degree": "AISSCE (10+2)",
+            "graduation_year": 2008,
+            "cgpa_or_percentage": "73%"
+        },
+        {
+            "institution": "Holy Child Auxilium Vasant Vihar, Delhi",
+            "degree": "AISSE (10)",
+            "graduation_year": 2006,
+            "cgpa_or_percentage": "87%"
+        }
+    ],
+    "projects": [],
+    "certifications": [],
+    "languages_spoken": [],
+    "total_experience_months": 162
+}

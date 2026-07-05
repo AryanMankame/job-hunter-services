@@ -1,0 +1,139 @@
+{
+    "full_name": "",
+    "email": null,
+    "phone": null,
+    "linkedin_url": null,
+    "github_url": null,
+    "location": null,
+    "summary": "I completed my MsC in Quantitative Finance at AFI Escuela de Finanzas, one of the most prestigious finance schools in Spain, in 2010. I have worked in Corporate & Investment Banking group in BBVA Trading Floor, as Senior Quant Developer, creating pricing libraries for complex financial derivatives, mainly using Murex FLEX API. During this period, I also complemented my financial background in the area of risk management, becoming a Financial Risk Manager (FRM) charterholder on January 2013. In November, 2013 I moved to Denmark to start a new project as a Senior Quant Developer in Nordea Trading Floor, coding pricing libraries in Infinity, an in-house corporate valuation engine focused on Interest Rates and Credit derivatives. After a great international experience in northern Europe, I accepted the challenge to start working again for BBVA from March, 2015. In my second journey in BBVA, I have faced challenges in the area of systems transformation, with two massive migration projects: Murex upgrade from v2.11 to v3.1 and the migration of the Security Finance portfolio from an old fashioned in-house system to Calypso v14. In May, 2022, I decided to accept a position as Lead Quant Developer in KWA Analytics. KWA is a consulting company that offers professional services for both commodities and capital markets clients. My focus at the moment is projects related with the implementation and evolution of Beacon Platform based systems. Beacon is a cloud based solution that allows to build front office applications in a flexible, secure, and scalable way.",
+    "skills": [
+        "Risk Systems",
+        "Quantitative Analysis (Finance)",
+        "FastAPI",
+        "Quantitative Finance",
+        "Software Development",
+        "Python",
+        "Beacon",
+        "C++",
+        "Murex",
+        "FLEX API",
+        "Calypso",
+        "Infinity",
+        "C#",
+        "Excellent Mathematic & Analytic Skills",
+        "Team Player"
+    ],
+    "work_experience": [
+        {
+            "company": "KWA Analytics",
+            "role": "Lead Quantitative Developer",
+            "duration": "May 2022 - Present",
+            "duration_months": 50,
+            "responsibilities": [
+                "Software Development in Python for Beacon Platform based systems.",
+                "Certified in both Core and FOS modules.",
+                "Participation in the development of a Beacon library aimed to calculate the available Borrowing Base (and many other credit risk related metrics) for the Asset Based Lending business line of a US Alternative Asset Management firm.",
+                "The project involved the creation of the calculation library, associated ETL processes and reconciliation with the existing calculation engine."
+            ],
+            "is_current": true
+        },
+        {
+            "company": "GLOBOS ARCOIRIS SL",
+            "role": "Commercial Pilot",
+            "duration": "September 2001 - Present",
+            "duration_months": 298,
+            "responsibilities": [
+                "Hot Air Balloon commercial pilot (group C) flying balloons up to Ultramagic N-300.",
+                "1000+ flight hours."
+            ],
+            "is_current": true
+        },
+        {
+            "company": "BBVA",
+            "role": "Senior Quantitative Developer",
+            "duration": "March 2015 - May 2022",
+            "duration_months": 86,
+            "responsibilities": [
+                "Development of pricing libraries for Interest Rates Vanilla and Exotic Products used by Global Markets Front Office teams (Trading, Sales, Structuring...).",
+                "These C++ libraries are connected to Murex through FLEX API.",
+                "Heavily involved in the migration from Murex v2.11.46 to Murex 3.1, adapting the libraries to be used by the new system, and introducing improvements (code refactoring, code adaptation to cope with new Murex features, conciliation process between systems...).",
+                "Product Owner for valuation streamline in the migration of Security Finance portfolio from an in-house system to Calypso v14."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "Nordea Markets",
+            "role": "Senior Interest Rates Developer",
+            "duration": "November 2013 - March 2015",
+            "duration_months": 16,
+            "responsibilities": [
+                "Development of C++ pricing libraries for Infinity, an in-house corporate valuation engine focused on derivatives (Interest Rates, Credit, Equity & Inflation).",
+                "Close work with the different stakeholders in order to improve the functionality of the system and create a resilient system.",
+                "Front Office: Development of a new methodology to incorporate Cheapest to Deliver effect into Interest Rates Curves generation.",
+                "Middle Office: Close interaction with Risk departments in order to ensure daily risk reports generation.",
+                "The group was in the middle of a mindset change in order to become an agile organization, which encouraged us even more to adopt agile software development techniques, such as scrum or kanban."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "BBVA",
+            "role": "Quantitative Developer",
+            "duration": "July 2010 - October 2013",
+            "duration_months": 39,
+            "responsibilities": [
+                "Development and Support of pricing libraries for Interest Rates Vanilla and Exotic Products used by Global Markets Front Office teams (Trading, Sales, Structuring...).",
+                "These C++ libraries are connected to Murex through FLEX API.",
+                "Focus on short rate models: LGM, Hull-White. Also maintenance and improvements on Stochastic Volatility models (SABR) and Copula models.",
+                "We had a big challenge adapting all libraries to be able to cope with negative interest rates, as up to those days most of the models assumed a lognormal evolution, but some currencies started to have negative quotes."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "BBVA Asset Management en Espana",
+            "role": "Financial Analyst",
+            "duration": "September 2009 - June 2010",
+            "duration_months": 9,
+            "responsibilities": [
+                "Day-to-day maintainance of valuation models (mainly C# developments) of OTC products included in firm's Equity funds."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "Deloitte Consulting",
+            "role": "Strategy & Operations Senior Consultant",
+            "duration": "January 2008 - June 2009",
+            "duration_months": 17,
+            "responsibilities": [
+                "Involvement on several projects aimed to deploy IT tools to improve business processes, mainly in Public Sector institutions."
+            ],
+            "is_current": false
+        }
+    ],
+    "education": [
+        {
+            "institution": "AFI Escuela de Finanzas",
+            "degree": "Master of Science - MS, Quantitative Finance",
+            "graduation_year": 2010,
+            "cgpa_or_percentage": null
+        },
+        {
+            "institution": "University of the Basque Country",
+            "degree": "Master of Science - MS, Electrical and Electronics Engineering",
+            "graduation_year": 2007,
+            "cgpa_or_percentage": null
+        }
+    ],
+    "projects": [],
+    "certifications": [
+        "Beacon Certified Core Developer",
+        "Beacon Certified Financial Engineer",
+        "Financial Risk Manager (FRM)"
+    ],
+    "languages_spoken": [
+        "Spanish",
+        "French",
+        "English",
+        "Danish"
+    ],
+    "total_experience_months": 298
+}

@@ -1,0 +1,55 @@
+SAR VESH PARAB
+Samata Nagar, Kandiwali East, Mumbai - 400101 ⋄ +91 7977737097 ⋄ sarveshparab602@gmail.com
+EDUCA TION
+Nirmala Memorial F oundation College, Mumbai Mar 2018
+BSC in Information and Technology
+WORK EXPERIENCE
+T echnical Support Analyst, Integreon Managed Solutions Jun - 2018 to July - 2019
+• To work alongside colleagues within the IT Department on support, development and project work
+where directed.
+• Manage vendors providing Network Cabling installation services.
+• Develop technical expertise in various Workday technologies, including but not limited to, user
+interface, authentication and system performance.
+PROJECTS
+Sell Solution (T eam size: 6)
+• An e-commerce portal that deals with selling multiple electronic gadget based products.
+• Integrated Stripes for payment and implemented the checkout process in addition to developing
+reports for orders
+• Created user walls to display the products added by the users, list of their followers and their
+posts, also designed the User Interface.
+iMaze
+• Worked in a team of four students to build a marble maze game, where the user aims to roll a
+marble through a maze within the time limit to reach the end, avoiding obstacles and collecting
+items along the way.
+• On-boarded more than 5000 students by direct marketing in 10 colleges in one month.
+Lyrics-Finder
+• An online lyrics ﬁnder web application to ﬁnd lyrics of any song across the world.
+• Used the musixmatch API to get the tracks.
+• Designed a friendly User Interface to interact with the app.
+JavaLearn (Final Y ear Project)
+• JavaLearn is a desktop application based on 3 tier architecture in which the E-Learning system is
+implemented.
+• This Desktop application is created using Java Language. Swing Components are used for design-
+ing purpose as well as coding.
+• HTML and CSS are also used in some places for better GUI Implementation. Java APIs are used
+to reduce code complexity.
+• MySQL server is used for Backend purpose, where all the data of JavaLearn application is being
+stored.
+React - T odoList app
+• An online todo app where users can add todos with diﬀerent priority levels, for eg. low, medium
+and high
+• Designed the user interface easy and simple for better interaction. User can delete, edit and add
+new todos.
+TECHNICAL SKILLS :
+REACT, JA V ASCRIPT, HTML, CSS, MONGODB, REACT-NA TIVE and NODE.JS
+ACADEMIC ACHIEVEMENTS
+Top 10 Finalist out of 35 teams at HERE Technologies Hackathon.
+Won First Prize in Model Making Competition Organized by Nirmala College, Mumbai.
+EXTRA-CIRRUCULAR
+• Attended a workshop on Microsoft Cyber Security at Thakur College in 2018.
+• Winner of Inter Departmental Football Competition 2015.
+• Trained in swimming for 3 months from SCN Club, Mumbai.
+PERSONAL TRAITS
+• Excellent conversationalist due to past experience in tech-support.
+• Grasps concepts super fast, and always curious to learn new things.
+• Can work in a team and lead it if needed.

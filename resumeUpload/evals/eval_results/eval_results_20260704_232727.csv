@@ -1,0 +1,2 @@
+filename,email_correct,phone_correct,location_correct,skills_recall,skills_precision,skills_f1,work_exp_count_match,education_count_match,experience_months_within_tolerance,full_name_match,hallucination_detected,error
+resume1.expected.json,False,True,False,0.8333333333333334,0.8333333333333334,0.8333333333333334,True,True,False,True,True,

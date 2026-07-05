@@ -1,0 +1,118 @@
+{
+    "full_name": "Dhruba Chakraborty",
+    "email": "dhrubamuk@gmail.com",
+    "phone": "+8801760954793",
+    "linkedin_url": null,
+    "github_url": null,
+    "location": "Uniliver Building, Elahi 8B, Surma, Akhalia, Sylhet",
+    "summary": "Seeking a career in IT and technology oriented industry to utilize my knowledge, skill, adaptability and team-work.",
+    "skills": [
+        "C",
+        "C++",
+        "Java",
+        "MATLAB",
+        "PHP",
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Laravel",
+        "Oracle",
+        "MySQL",
+        "MongoDB",
+        "Netbeans",
+        "CodeBlocks",
+        "Algorithm",
+        "Data Structure",
+        "Competitive Programming",
+        "Unity"
+    ],
+    "work_experience": [],
+    "education": [
+        {
+            "institution": "Shahjalal University of Science and Technology, Sylhet",
+            "degree": "B.Sc in Engineering, Computer Science and Engineering",
+            "graduation_year": null,
+            "cgpa_or_percentage": "3.10(4.00)"
+        },
+        {
+            "institution": "Govt Hazi Md. Mohsin College, Chittagong",
+            "degree": "Higher Secondary Certificate",
+            "graduation_year": 2012,
+            "cgpa_or_percentage": "5.00 (scale 5.00)"
+        },
+        {
+            "institution": "J B High School, Mirsarai, Chittagong",
+            "degree": "Secondary School Certificate",
+            "graduation_year": 2010,
+            "cgpa_or_percentage": "5.00 (scale 5.00)"
+        }
+    ],
+    "projects": [
+        {
+            "name": "Mukto Shikkha",
+            "description": "Built a knowledge sharing platform for school and college students, where they can share questions and problems, answer them, create and give examinations. Platform: PHP(Laravel).",
+            "tech_stack": [
+                "PHP",
+                "Laravel"
+            ]
+        },
+        {
+            "name": "Graph Plotter",
+            "description": "Java application which plots graphs and chart from equation.",
+            "tech_stack": [
+                "Java"
+            ]
+        },
+        {
+            "name": "Crazy Foody",
+            "description": "An arcade game made with Unity game Engine.",
+            "tech_stack": [
+                "Unity",
+                "C"
+            ]
+        },
+        {
+            "name": "Hotel Management System",
+            "description": "A PHP web application for hotel management.",
+            "tech_stack": [
+                "PHP"
+            ]
+        },
+        {
+            "name": "Network Monitor",
+            "description": "A C# application which measures upload download speed.",
+            "tech_stack": [
+                "C#"
+            ]
+        },
+        {
+            "name": "Perspective Miner",
+            "description": "An application which makes a sentimental analysis on Bangladesh depending on international newspapers.",
+            "tech_stack": []
+        },
+        {
+            "name": "Event Scheduler",
+            "description": "A count down scheduler system for upcoming events and deadline. Platform: PHP(Laravel).",
+            "tech_stack": [
+                "PHP",
+                "Laravel"
+            ]
+        },
+        {
+            "name": "Shop Management System",
+            "description": "A Java(NoSQL) application for management of a shop.",
+            "tech_stack": [
+                "Java",
+                "NoSQL"
+            ]
+        },
+        {
+            "name": "Bangla Optical Character Recognition",
+            "description": "Building a labeling system for Bangla OCR. Ongoing thesis works for final year research project.",
+            "tech_stack": []
+        }
+    ],
+    "certifications": [],
+    "languages_spoken": [],
+    "total_experience_months": null
+}

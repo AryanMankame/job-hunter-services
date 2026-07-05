@@ -1,0 +1,91 @@
+{
+    "full_name":"Shubham Gupta",
+    "email":"[guptas@iitk.ac.in](mailto:guptas@iitk.ac.in)",
+    "phone":"(+91)-7754916033",
+    "linkedin_url":null,
+    "github_url":null,
+    "location":"Kanpur, India",
+    "summary":null,
+    "skills":["AnyLogic","ArcGis","MS-Office","C","Java","LATEX"],
+    "work_experience":[
+        {
+            "company":"Chittranjan Locomotive Workshop (CLW), West Bengal, India",
+            "role":"Case Study on operations",
+            "duration":"May ’16 – Present",
+            "duration_months":null,
+            "responsibilities":[
+                "Surveyed Chittranjan Locomotive Workshop to map the processes involved in the manufacture of electric locomotives.","Developed a simulation model of the processes to analyse the workshop capacity, bottlenecks and explored opportunities for improvement of throughput using AnyLogic Software.","Developed a case study to enable appreciation of various concepts of capacity analysis."
+            ],
+            "is_current":true
+        },
+        {
+            "company":"Infrastructure Leasing and Financial Services Energy Limited, Gurgaon, India",
+            "role":"Intern",
+            "duration":"May’15–Jul’15",
+            "duration_months":3,
+            "responsibilities":[
+                "Analyzed the foundation works, piling works of transmission line towers.","Developed substantial understanding of planning as well as execution of the project."
+            ],
+            "is_current":false
+        },
+        {
+            "company":"Kochi Metro Rail Limited, Kochi, India",
+            "role":"Intern",
+            "duration":"Dec ’14",
+            "duration_months":1,
+            "responsibilities":[
+                "Visited a construction yard and observed the construction of I-Girders, U-Girders used for construction and support of metro viaduct.","Familiarized with piling work, pile cap, pier casting, precast girders and pier caps.","Reviewed quality and safety control procedures."
+            ],
+            "is_current":false
+        }
+    ],
+    "education":[
+        {
+            "institution":"Indian Institute of Technology (IIT) Kanpur",
+            "degree":"B.Tech, Civil Engineering",
+            "graduation_year":2017,
+            "cgpa_or_percentage":"7.0* /10.0"
+        },
+        {
+            "institution":"D.A.V Public School, Kota",
+            "degree":"Senior Secondary(CBSE)",
+            "graduation_year":2012,
+            "cgpa_or_percentage":"86.8%"
+        },
+        {
+            "institution":"City Montessori School, Lucknow",
+            "degree":"Secondary (ICSE)",
+            "graduation_year":2010,
+            "cgpa_or_percentage":"95.4%"
+        }
+    ],
+    "projects":[
+        {
+            "name":"Topographical Mapping of Academic Area",
+            "description":"Established control with the help of Total Station and Auto Level. Mapped all the features of academic area, IIT Kanpur using GPS, Total station and Auto Level and used ArcGIS 9.3 Software for generating a comprehensive map.",
+            "tech_stack":[
+                "Total Station",
+                "Auto Level",
+                "GPS",
+                "ArcGIS 9.3"
+            ]
+        },
+        {
+            "name":"Manufacturing Processes I, Material Science Project",
+            "description":"Coordinated with a team of 6 members to design and model a replica of The Amsterdam Arena. Used casting, welding, brazing, cutting and sheet metal folding.",
+            "tech_stack":[
+
+            ]
+        },
+        {
+            "name":"Manufacturing Processes II, Mechanical Project",
+            "description":"Built a Mechanical Spider utilizing a chain-sprocket mechanism. Fabricated parts through lathe, milling, welding and other conventional manufacturing techniques.",
+            "tech_stack":[
+
+            ]
+        }
+    ],
+    "certifications":[],
+    "languages_spoken":[],
+    "total_experience_months":null
+}

@@ -1,0 +1,123 @@
+{
+    "full_name": "Clement Rodrigues",
+    "email": "clem.rodrigues@gmail.com",
+    "phone": "647.545.6008",
+    "linkedin_url": "https://www.linkedin.com/in/ClementRodrigues",
+    "github_url": null,
+    "location": null,
+    "summary": null,
+    "skills": [
+        "Catia",
+        "Adams",
+        "Abaqus",
+        "Matlab",
+        "C",
+        "VBA",
+        "Dynamic Simulation",
+        "Mechanical Design",
+        "Project Management",
+        "Failure Assessment"
+    ],
+    "work_experience": [
+        {
+            "company": "SAFRAN MESSIER-BUGATTI-DOWTY",
+            "role": "Performance Engineer",
+            "duration": "Oct 2014 - Oct 2016",
+            "duration_months": 24,
+            "responsibilities": [
+                "Carried out Taxi and Dynamic Braking dynamic simulations as part of the Bombardier Global 7000/8000 performance assessment.",
+                "Re-designed the Adams Shimmy model with flexible bodies and insured its fidelity through a modal frequency response analysis and a stiffness study.",
+                "Harmonized performance methods across UK, France and Canada by writing the first Adams model descriptions for North-American aircraft programs."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "AIRBUS",
+            "role": "Apprentice Mechanical Engineer",
+            "duration": "Sep 2011 - Sep 2014",
+            "duration_months": 36,
+            "responsibilities": [
+                "Performed weight saving and systems optimization studies to meet the A330NEO requirements, which involved modifying flight controls as well as revising existing mechanical systems.",
+                "Modified fuel and hydraulic systems within the A330 center tank by improving electrical continuity in order to avoid any static discharge.",
+                "Implemented electronic flight bags (EFB) for A330, which required the modification of the cockpit layout while taking the pilots requirements into account.",
+                "Designed A320neo mechanical and electrical systems at the wing/fuselage and wing/pylon interfaces.",
+                "Assessed electrical harnesses compliance with regards to engine fire risks."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "AVIO",
+            "role": "Design Intern",
+            "duration": "Apr 2011 - Jun 2011",
+            "duration_months": 2,
+            "responsibilities": [
+                "Designed and modeled the roll generator for Vega launcher, including the nozzles, pipes and propellant flow optimization.",
+                "Achieved several repairs on Ariane 5 boosters and implemented them while they were in production."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "SPACEX",
+            "role": "Industry Advisor for Ryerson's Hyperloop Team",
+            "duration": "Aug 2015 - Present",
+            "duration_months": 131,
+            "responsibilities": [
+                "Responsible for design validation and performance analysis of the Hyperloop Deployable Wheel System developed for the Hyperloop Competition.",
+                "Winner of the Subsystem Innovation Award by SpaceX during the competition finals in Texas (124 Universities, more than 1000 students).",
+                "Design patent pending with Messier-Bugatti-Dowty, our main partner."
+            ],
+            "is_current": true
+        },
+        {
+            "company": "ICAM Material Lab",
+            "role": "Scientific Memoir",
+            "duration": "Sep 2013 - Feb 2014",
+            "duration_months": 5,
+            "responsibilities": [
+                "Performed corrosion research in support of my Masters Degree.",
+                "Performed a failure assessment on a boiler affected by corrosion to settle a litigation between the manufacturer and the customer.",
+                "Studied corrosion between carbon fiber composite and treated aluminium on behalf of Ratier Figeac, a subsidiary of UTC Aerospace Systems."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "ICAM",
+            "role": "Head of R&T for the Research and Industrial Day",
+            "duration": "Apr 2012 - Apr 2013",
+            "duration_months": 12,
+            "responsibilities": [
+                "Managed 26 people during one year in order to organize the Research and Industrial Day, a one day conference about the energy challenge within the embedded systems, involving students, industry professionals and scientists."
+            ],
+            "is_current": false
+        }
+    ],
+    "education": [
+        {
+            "institution": "ICAM (Institut Catholique d Arts et Metiers)",
+            "degree": "MENG - Mechanical & Controls",
+            "graduation_year": 2014,
+            "cgpa_or_percentage": null
+        },
+        {
+            "institution": "Universite Paul Sabatier",
+            "degree": "DUT - Mechanical & Aerospace",
+            "graduation_year": 2011,
+            "cgpa_or_percentage": null
+        },
+        {
+            "institution": "Lycce Victor Hugo",
+            "degree": "A Levels - Sciences",
+            "graduation_year": 2009,
+            "cgpa_or_percentage": null
+        }
+    ],
+    "projects": [],
+    "certifications": [],
+    "languages_spoken": [
+        "French",
+        "English",
+        "Italian",
+        "German"
+    ],
+    "total_experience_months": 183
+}

@@ -1,0 +1,120 @@
+{
+    "full_name": "Akshay Vaishnav",
+    "email": "vaishnavakshay007@gmail.com",
+    "phone": "+91 720 393 7889",
+    "linkedin_url": null,
+    "github_url": null,
+    "location": "C-101, Dreamland Apartment, Backbone Park, B/H Balaji Hall, Rajkot-360004, Gujarat",
+    "summary": null,
+    "skills": [
+        "AUTOCAD",
+        "CATIA V5",
+        "ANSYS",
+        "OptimumLap",
+        "MATLAB",
+        "FEA",
+        "CFD",
+        "CAD/CAE",
+        "Finite Element Analysis"
+    ],
+    "work_experience": [
+        {
+            "company": "Expertshub, Sinhgad Institute of Engineering, Pune",
+            "role": "Automotive Industry Simulation Intern",
+            "duration": "June 2015",
+            "duration_months": 1,
+            "responsibilities": [
+                "Participated in Automotive Industry Simulation Internship."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "Amul Group of Industries, Rajkot",
+            "role": "Intern - Machining and Quality Control of Forged Connecting Rods",
+            "duration": "February 2015",
+            "duration_months": 1,
+            "responsibilities": [
+                "Worked on Machining and Quality Control of Forged Connecting Rods."
+            ],
+            "is_current": false
+        },
+        {
+            "company": "GT Motorsports, a Formula Student Team of GTU",
+            "role": "CAE and Powertrain Lead",
+            "duration": "August 2015 - Present",
+            "duration_months": 131,
+            "responsibilities": [
+                "Devised the design objectives and validation of designs through simulations and testings.",
+                "Concentrated on real time simulation of Exhaust System and the noise reduction of Exhaust system.",
+                "Part of core Design group in the team helping with various design decisions.",
+                "Performed numerous simulations of various components of the car in the area of FEA and CFD segments with documentations."
+            ],
+            "is_current": true
+        },
+        {
+            "company": "Sanjaybhai Rajguru College of Engineering Robotics Club",
+            "role": "Head coordinator of Mechanical section",
+            "duration": "July 2015 - May 2016",
+            "duration_months": 10,
+            "responsibilities": [
+                "A college level Robotics club established by students with the aim of learning and professional skill development among students and peers.",
+                "Lead in Mechanical work of Robotics club, working mostly with CAD and Hardware systems.",
+                "Team leader and active member working to develop various robots of different concepts and configurations."
+            ],
+            "is_current": false
+        }
+    ],
+    "education": [
+        {
+            "institution": "Sanjaybhai Rajguru College of Engineering, Rajkot, Gujarat Technological University",
+            "degree": "Bachelor of Engineering in Mechanical Engineering",
+            "graduation_year": 2016,
+            "cgpa_or_percentage": "8.38/10.00"
+        },
+        {
+            "institution": "Shree S.G. Dholakiya Higher Secondary School, Rajkot, Gujarat",
+            "degree": "HSC, Class XII",
+            "graduation_year": 2012,
+            "cgpa_or_percentage": "57%"
+        },
+        {
+            "institution": "Shree S.G. Dholakiya Secondary School, Rajkot, Gujarat",
+            "degree": "SSC, Class X",
+            "graduation_year": 2010,
+            "cgpa_or_percentage": "83%"
+        }
+    ],
+    "projects": [
+        {
+            "name": "Design Optimization of Hydraulic Press Plate using Finite Element Analysis",
+            "description": "An Industrial Defined Project in collaboration with Incredible Machines, Rajkot. Designed and performed an FEA analysis of the plates of Hydraulic machine with the capacity of 250-ton. Optimization in terms of design and material reduction, leading to cost effectiveness, considering minimum deformation of plates during operation.",
+            "tech_stack": [
+                "FEA"
+            ]
+        },
+        {
+            "name": "Mathematical Modeling and Analysis of a Hydro-pneumatic Suspension Column of a Car",
+            "description": "Modeled a 2-DOF system considering sprung and unsprung mass of the vehicle. Performed sensitivity analysis to minimize the displacement of sprung and unsprung mass caused by vehicle hitting a bump using Transfer Function approach. The settling time and displacement of the system were decreased using Hydro-pneumatic suspension system.",
+            "tech_stack": []
+        },
+        {
+            "name": "Design and Thermal analysis of Disk Brake Rotor using ANSYS",
+            "description": "Applied Energy Equation to calculate theoretical data for the input of simulation. Devised boundary conditions for modeling the system by calculating including Heat power and Heat flux. A Static thermal analysis in ANSYS Workbench using real time boundary conditions to obtain temperature distribution of Brake Rotor.",
+            "tech_stack": [
+                "ANSYS",
+                "ANSYS Workbench"
+            ]
+        },
+        {
+            "name": "Design, Development and Analysis of Exhaust System and Muffler assembly",
+            "description": "Design and Development of complete muffler assembly for the reduction of noise under 110 dBC as per the rulebook. Modeling and Acoustics analysis of muffler assembly in ANSYS to determine the Transmission Loss. A CFD analysis of Exhaust Manifold using ANSYS Fluent to optimize the exhaust gas flow.",
+            "tech_stack": [
+                "ANSYS",
+                "ANSYS Fluent"
+            ]
+        }
+    ],
+    "certifications": [],
+    "languages_spoken": [],
+    "total_experience_months": 137
+}
