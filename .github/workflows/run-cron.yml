@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   fetch_jobs:
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
     - name: Setup Python
