@@ -18,7 +18,7 @@ jobs:
         pip install -r requirements.txt
     - name: fetch_jobs & upload
       env: 
-        API-URL: ${{secrets.API_URL}}
+        API_URL: ${{secrets.API_URL}}
         API_KEY_ACC1: ${{secrets.API_KEY_ACC1}}
         API_KEY_ACC2: ${{secrets.API_KEY_ACC2}}
         MONGO_USERNAME: ${{secrets.MONGO_USERNAME}}
