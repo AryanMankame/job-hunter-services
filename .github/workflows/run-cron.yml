@@ -1,0 +1,32 @@
+name: Fetch jobs & upload to mongodb
+on:
+  schedule:
+    - cron: 12 0 * * *
+  workflow_dispatch:
+jobs:
+  fetch_jobs:
+    runs_on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install Dependencies
+      run: |
+        cd cronjob
+        pip install -r requirements.txt
+    - name: fetch_jobs & upload
+      env: 
+        API-URL: ${{secrets.API_URL}}
+        API_KEY_ACC1: ${{secrets.API_KEY_ACC1}}
+        API_KEY_ACC2: ${{secrets.API_KEY_ACC2}}
+        MONGO_USERNAME: ${{secrets.MONGO_USERNAME}}
+        MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
+      run: |
+        cd cronjob
+        python3 fetch_jobs.py
+
+
+
+
