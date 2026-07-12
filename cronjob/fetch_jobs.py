@@ -7,6 +7,7 @@ import hashlib
 import datetime
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor
 from Jobprocessor import JobPreprocessor
 
 logging.basicConfig(level=logging.INFO)
@@ -106,14 +107,12 @@ def main():
                     "date_posted": "all",
                 })
 
-    logger.info(f"Total queries to process: {len(queries[:10])}")
+    logger.info(f"Total queries to process: {len(queries)}")
 
     # Process queries
     st_t = time.perf_counter()
     total_jobs_fetched = 0
-    total_jobs_inserted = 0
-
-    for i, query in enumerate(queries[:10]):
+    for i, query in enumerate(queries[:5]):
         st = time.perf_counter()
 
         # Alternate between API keys
@@ -121,6 +120,7 @@ def main():
 
         try:
             jobs_data = fetch_jobs_from_api(api_key, query)
+            print(jobs_data)
             en = time.perf_counter()
             logger.info(f"Request {i} took {en - st:.2f}s")
 
@@ -128,9 +128,8 @@ def main():
                 jobs_list = jobs_data.get("data", {}).get("jobs", [])
                 total_jobs_fetched += len(jobs_list)
 
-                for job in jobs_list:
-                    if insert_jobs_into_mongodb(job):
-                        total_jobs_inserted += 1
+                with ThreadPoolExecutor(max_workers=4) as executor:
+                    res = list(executor.map(insert_jobs_into_mongodb,jobs_list))
 
             else:
                 logger.warning(f"Query {i} returned status: {jobs_data.get('status')}")
@@ -143,7 +142,6 @@ def main():
 
     logger.info("=== Job Aggregation Complete ===")
     logger.info(f"Total jobs fetched: {total_jobs_fetched}")
-    logger.info(f"Total jobs inserted/updated: {total_jobs_inserted}")
     logger.info(f"Total time taken: {en_t - st_t:.2f}s")
 
 
