@@ -1,0 +1,103 @@
+{
+    "full_name": "Aryan Mankame",
+    "email": "aryan672002@gmail.com",
+    "phone": "+91-7387159818",
+    "linkedin_url": "linkedin.com/in/aryan-mankame",
+    "github_url": "github.com/aryan672002",
+    "location": "Pune, India",
+    "summary": null,
+    "skills": [
+        "JavaScript (ES6+)",
+        "TypeScript",
+        "Java",
+        "Python",
+        "SQL",
+        "C++",
+        "Scala",
+        "Bash Scripting",
+        "React.js",
+        "Next.js",
+        "Three.js",
+        "Redux.js",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "Node.js",
+        "Express.js",
+        "Oracle DB",
+        "PostgreSQL",
+        "MongoDB",
+        "Mongoose",
+        "Tensorflow",
+        "Machine Learning Algorithms",
+        "RAG",
+        "Deep Learning",
+        "LLM",
+        "Docker",
+        "Git",
+        "Bitbucket API",
+        "TeamCity",
+        "CI/CD",
+        "Linux/Unix",
+        "Postman"
+    ],
+    "work_experience": [
+        {
+            "company": "Deutsche Bank",
+            "role": "Software Development Engineer",
+            "duration": "Jul 2024 – Present",
+            "duration_months": 25,
+            "responsibilities": [
+                "Implemented Oracle database full backups with hourly mirroring, increasing system reliability and limiting outage downtime to under 5 minutes in case of failures.",
+                "Developed an FAQ chatbot to automate user support, reducing daily Q&A tickets by 90% (from about 10 per day to 1 per day).",
+                "Refactored the RFTA platform’s architecture by consolidating five database-utilizing services into a single shared service, reducing downtime for database-connection updates from 30 minutes to 3 minutes.",
+                "Optimized the report-download service, tripling its download speed through performance tuning, which improved throughput by 3× without adding hardware.",
+                "Built a Scala-based data-connection management module (backed by a web interface) that automates credential updates via the Bitbucket API. This reduced user update time from 10–15 minutes down to about 10–30 seconds.",
+                "Developed a regression test suite for the Python 'ltb-bd' build-deployment package, boosting its unit-test coverage from 60% to 90% and catching more bugs before release.",
+                "Configured and maintained TeamCity CI/CD pipelines to automate builds and deployments across projects (ensuring consistent continuous integration)."
+            ],
+            "is_current": true
+        }
+    ],
+    "education": [
+        {
+            "institution": "Maulana Azad National Institute of Technology Bhopal",
+            "degree": "Bachelor of Technology in Computer Science",
+            "graduation_year": 2024,
+            "cgpa_or_percentage": "CGPA: 8.98 / 10.0"
+        }
+    ],
+    "projects": [
+        {
+            "name": "Mongo-Bolt",
+            "description": "Designed and published a lightweight TypeScript NPM package to simplify MongoDB operations.",
+            "tech_stack": [
+                "TypeScript",
+                "Node.js",
+                "MongoDB"
+            ]
+        },
+        {
+            "name": "FitTrackMe",
+            "description": "Built a comprehensive fitness platform featuring modules like Meal Planner, Exercise Tracker, and a GPT-3 powered Health Assistant.",
+            "tech_stack": [
+                "React.js",
+                "Express.js",
+                "Redux",
+                "OpenAI API"
+            ]
+        },
+        {
+            "name": "EHM-Cervix",
+            "description": "Combined three hybrid CNN architectures to classify cervical cancer images from the SIPakMed dataset.",
+            "tech_stack": [
+                "Python",
+                "CNN",
+                "TensorFlow"
+            ]
+        }
+    ],
+    "certifications": [],
+    "languages_spoken": [],
+    "total_experience_months": 25
+}
