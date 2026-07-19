@@ -28,7 +28,6 @@ debugpy==1.8.21
 decorator==5.3.1
 distro==1.9.0
 dnspython==2.8.0
-en_core_web_md @ https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl#sha256=5e6329fe3fecedb1d1a02c3ea2172ee0fede6cea6e4aefb6a02d832dba78a310
 etelemetry==0.3.1
 executing==2.2.1
 fastapi==0.138.1
@@ -128,7 +127,6 @@ rdflib==7.6.0
 regex==2026.5.9
 requests==2.34.2
 requests-toolbelt==1.0.0
--e git+ssh://git@github.com/AryanMankame/job-hunter-services.git@f2b8d6ea8c65e56b3a4b3a0892d490cd813acb05#egg=resume_upload
 rich==15.0.0
 safetensors==0.7.0
 scikit-learn==1.8.0
