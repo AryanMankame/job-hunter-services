@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock, MagicMock
 from ResumeService import ResumeService
-from conftest import make_blank_pdf_bytes
+from .conftest import make_blank_pdf_bytes
 
 
 class TestGetTextFromPdf:

@@ -7,6 +7,7 @@ name = "resume-upload"
 version = "0.1.0"
 requires-python = ">=3.11"
 
+
 dependencies = [
     "langchain-openai",
     "langchain-nvidia-ai-endpoints",
@@ -19,4 +20,9 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["resumeUpload*"]
+include = ["resumeUpload*","jobMatch*"]
+
+[tool.pytest.ini_options]
+testpaths = ["jobMatch/tests", "resumeUpload/tests"]
+pythonpath = ["jobMatch", "resumeUpload"]
+addopts = ["--import-mode=importlib"]

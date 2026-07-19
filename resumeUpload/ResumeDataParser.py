@@ -215,4 +215,6 @@ if __name__ == "__main__":
         for page in reader.pages:
             resume_text += page.extract_text() + "\n"
     resume_data = parser.parse(resume_text)
-    print(resume_data.model_dump_json(indent=2))
+    with open("/Users/aryanmankame/Projects/jobHunter/server/jobMatch/resume_data.json", "w") as f:
+        f.write(resume_data.model_dump_json(indent=4))
+    print(resume_data.model_dump_json(indent=4))

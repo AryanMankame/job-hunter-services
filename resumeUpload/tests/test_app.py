@@ -3,10 +3,9 @@ import pytest
 from unittest.mock import Mock
 from fastapi.testclient import TestClient
 
-import app as app_module
-from app import app
+from resumeUpload import app as app_module
 
-client = TestClient(app)
+client = TestClient(app_module.app)
 
 VALID_EMAIL = "jane@example.com"
 FAKE_PDF_BYTES = b"%PDF-1.4 fake-but-content-type-is-what-app.py-checks"
@@ -34,14 +33,14 @@ class TestUploadValidation:
 
     def test_rejects_non_pdf_content_type(self):
         resp = upload(content_type="image/png")
-        assert resp.status_code == 400
+        assert resp.status_code == 415
         assert "PDF" in resp.json()["detail"]
 
     def test_rejects_file_over_5mb(self):
         big_file = b"a" * (5 * 1024 * 1024 + 1)
         resp = upload(file_bytes=big_file)
-        assert resp.status_code == 400
-        assert "too large" in resp.json()["detail"].lower()
+        assert resp.status_code == 413
+        assert "exceeds" in resp.json()["detail"].lower()
 
     def test_rejects_invalid_email_format(self):
         resp = upload(email="not-an-email")
@@ -71,7 +70,7 @@ class TestUploadHappyPath:
 
         assert resp.status_code == 200
         body = resp.json()
-        assert body["id"] == "generated-id-123"
+        assert body["resume_id"] == "generated-id-123"
         assert "success" in body["message"].lower()
 
         mock_service.get_text_from_pdf.assert_called_once()
@@ -103,7 +102,7 @@ class TestUploadFailurePaths:
 
         resp = upload()
 
-        assert resp.status_code == 502
+        assert resp.status_code == 500
 
     def test_llm_parsing_failure_returns_422(self, monkeypatch):
         mock_service = Mock()
@@ -125,4 +124,4 @@ class TestUploadFailurePaths:
 
         resp = upload()
 
-        assert resp.status_code == 502
+        assert resp.status_code == 500

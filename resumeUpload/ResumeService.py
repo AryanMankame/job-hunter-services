@@ -1,5 +1,5 @@
 from pypdf import PdfReader
-from ResumeDataParser import ResumeDataParser
+from ResumeDataParser import ResumeDataParser, ResumeData
 import io
 
 class ResumeService:
@@ -10,7 +10,7 @@ class ResumeService:
         for page in reader.pages:
             file_text += page.extract_text()
         return file_text
-    def parse_resume(self,parser: ResumeDataParser,file_text: str) -> ResumeDataParser:
+    def parse_resume(self,parser: ResumeDataParser,file_text: str) -> ResumeData:
         parsed_resume = parser.parse(file_text)
         return parsed_resume
     def save_to_mongodb(self,client,email: str,parsed_resume: ResumeDataParser) -> str:

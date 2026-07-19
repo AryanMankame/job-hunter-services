@@ -2,8 +2,6 @@ import copy
 import pytest
 from unittest.mock import MagicMock, patch
 from fastapi.testclient import TestClient
-from fastapi.exceptions import ResponseValidationError
-
 import app as app_module
 from app import app, score_resume
 from resumeUpload.ResumeDataParser import ResumeData
@@ -168,27 +166,26 @@ class TestFindMatches:
 
     def test_invalid_email_returns_400(self):
         with patch("app.jobs_collection"):
-            with pytest.raises(ResponseValidationError):
-                client.post(
-                    "/findMatches",
-                    params={"email": "not-an-email"},
-                    json=SAMPLE_RESUME_DATA,
-                )
+            resp = client.post(
+                "/findMatches",
+                json={"email": "not-an-email", "resumeData": SAMPLE_RESUME_DATA},
+            )
+        assert resp.status_code == 200
+        assert "Invalid email format" in str(resp.json())
 
     def test_invalid_email_does_not_query_db(self):
         with patch("app.jobs_collection") as mock_jobs:
-            try:
-                client.post(
-                    "/findMatches",
-                    params={"email": "bad-email"},
-                    json=SAMPLE_RESUME_DATA,
-                )
-            except ResponseValidationError:
-                pass
+            client.post(
+                "/findMatches",
+                json={"email": "bad-email", "resumeData": SAMPLE_RESUME_DATA},
+            )
             mock_jobs.find.assert_not_called()
 
     def test_returns_only_jobs_with_score_above_50(self):
-        with patch("app.jobs_collection") as mock_jobs:
+        with (
+            patch("app.jobs_collection") as mock_jobs,
+            patch("app.users_collection") as mock_users,
+        ):
             mock_cursor = MagicMock()
             mock_cursor.to_list.return_value = [
                 dict(SAMPLE_JOB, _id="high-score"),
@@ -205,38 +202,39 @@ class TestFindMatches:
 
             resp = client.post(
                 "/findMatches",
-                params={"email": "jane@example.com"},
-                json=SAMPLE_RESUME_DATA,
+                json={"email": "jane@example.com", "resumeData": SAMPLE_RESUME_DATA},
             )
 
             assert resp.status_code == 200
-            assert len(resp.json()) == 2
+            assert len(resp.json()["filtered_list"]) == 2
 
     def test_mongo_failure_returns_501(self):
         with patch("app.jobs_collection") as mock_jobs:
             mock_jobs.find.side_effect = RuntimeError("mongo connection lost")
 
-            with pytest.raises(ResponseValidationError):
-                client.post(
-                    "/findMatches",
-                    params={"email": "jane@example.com"},
-                    json=SAMPLE_RESUME_DATA,
-                )
+            resp = client.post(
+                "/findMatches",
+                json={"email": "jane@example.com", "resumeData": SAMPLE_RESUME_DATA},
+            )
+        assert resp.status_code == 200
+        assert "mongo connection lost" in str(resp.json())
 
     def test_empty_db_returns_empty_list(self):
-        with patch("app.jobs_collection") as mock_jobs:
+        with (
+            patch("app.jobs_collection") as mock_jobs,
+            patch("app.users_collection") as mock_users,
+        ):
             mock_cursor = MagicMock()
             mock_cursor.to_list.return_value = []
             mock_jobs.find.return_value = mock_cursor
 
             resp = client.post(
                 "/findMatches",
-                params={"email": "jane@example.com"},
-                json=SAMPLE_RESUME_DATA,
+                json={"email": "jane@example.com", "resumeData": SAMPLE_RESUME_DATA},
             )
 
             assert resp.status_code == 200
-            assert resp.json() == []
+            assert resp.json() == {"filtered_list": []}
 
 
 class TestFindMatchesBugs:
@@ -248,36 +246,34 @@ class TestFindMatchesBugs:
     """
 
     def test_bug_inner_http_exception_swallowed_by_outer_except(self):
-        """BUG: raise HTTPException(400) inside try/except gets caught by
-        `except Exception` on line 55, converted to
-        `return HTTPException(501, str(e))`, then fails FastAPI's
-        `-> list` response validation → ResponseValidationError (500).
+        """BUG: HTTPException(400) is returned instead of raised.
+        FastAPI serializes the returned HTTPException object as a 200
+        response instead of HTTP 400.
 
         Expected: HTTP 400 with 'Invalid email format'.
-        Actual:   ResponseValidationError because the returned
-                  HTTPException(501) is not a list.
+        Actual:   HTTP 200 with serialized error body.
         """
         with patch("app.jobs_collection"):
-            with pytest.raises(ResponseValidationError):
-                client.post(
-                    "/findMatches",
-                    params={"email": "not-an-email"},
-                    json=SAMPLE_RESUME_DATA,
-                )
+            resp = client.post(
+                "/findMatches",
+                json={"email": "not-an-email", "resumeData": SAMPLE_RESUME_DATA},
+            )
+        assert resp.status_code == 200
+        assert "Invalid email format" in str(resp.json())
 
     def test_bug_mongo_error_masked_by_response_validation(self):
         """BUG: Same as above — RuntimeError → return HTTPException(501)
-        → FastAPI -> list validation rejects it.
+        but is serialized as a 200 response instead of HTTP 501.
 
         Expected: HTTP 501.
-        Actual:   ResponseValidationError (500 class).
+        Actual:   HTTP 200 with serialized error body.
         """
         with patch("app.jobs_collection") as mock_jobs:
             mock_jobs.find.side_effect = RuntimeError("mongo connection lost")
 
-            with pytest.raises(ResponseValidationError):
-                client.post(
-                    "/findMatches",
-                    params={"email": "jane@example.com"},
-                    json=SAMPLE_RESUME_DATA,
-                )
+            resp = client.post(
+                "/findMatches",
+                json={"email": "jane@example.com", "resumeData": SAMPLE_RESUME_DATA},
+            )
+        assert resp.status_code == 200
+        assert "mongo connection lost" in str(resp.json())

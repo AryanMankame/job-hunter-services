@@ -3,12 +3,14 @@ from dotenv import load_dotenv
 import os
 from locations import roles, locations
 from pymongo import MongoClient
+from pymongo.errors import PyMongoError
 import hashlib
 import datetime
 import logging
 import time
 from concurrent.futures import ThreadPoolExecutor
 from Jobprocessor import JobPreprocessor
+from jobMatch.calculate_skills_score import SkillsMatcher
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -26,7 +28,8 @@ client = MongoClient(
 )
 db = client['jobHunter']
 jobs_collection = db['jobData']
-
+users_collection = db['resumeData']
+skillmatcher = SkillsMatcher()
 
 def fetch_jobs_from_api(api_key, querystring):
     """Fetch jobs from JSearch API"""
@@ -84,6 +87,53 @@ def insert_jobs_into_mongodb(job):
         logger.error(f"Error inserting job {job.get('job_id')}: {e}")
         return False
 
+def clean_up_old_job_postings(days: int = 30) -> int:
+    """
+    Delete job postings older than `days` and remove their references
+    from every user's matches list.
+    """
+    cutoff = datetime.datetime.now() - datetime.timedelta(days=days)
+    old_job_ids = list(
+        jobs_collection.find(
+            {"preprocessed_at": {"$lt": cutoff}},
+            {"job_id": 1, "_id": 0},
+        )
+    )
+    if not old_job_ids:
+        logger.info("No expired job postings found.")
+        return 0
+    job_ids = [job["job_id"] for job in old_job_ids]
+    with client.start_session() as session:
+        with session.start_transaction():
+            delete_result = jobs_collection.delete_many(
+                {"job_id": {"$in": job_ids}},
+                session=session,
+            )
+            users_collection.update_many(
+                {},
+                {
+                    "$pull": {
+                        "matches": {
+                            "job_id": {"$in": job_ids}
+                        }
+                    }
+                },
+                session=session,
+            )
+    logger.info(f"Removed {delete_result.deleted_count} expired job postings.")
+    return delete_result.deleted_count
+
+def insert_job_into_users_match(job):
+    """
+    Insert job into already existing user
+    """
+    try:
+        users = users_collection.find({})
+        for user in users:
+            if skillmatcher.calculate_skills_score(user['skills'],job['extracted']['required_skills'],job['extracted']['nice_to_have_skills']) > 50:
+                users_collection.update_one({ "_id": user["_id"]}, {"$push": {"matches": job } })
+    except PyMongoError as err:
+        logger.error(f"Error inserting job into user: {err}")
 
 def main():
     """Main execution"""
@@ -112,7 +162,7 @@ def main():
     # Process queries
     st_t = time.perf_counter()
     total_jobs_fetched = 0
-    for i, query in enumerate(queries[:5]):
+    for i, query in enumerate(queries[:1]):
         st = time.perf_counter()
 
         # Alternate between API keys
@@ -120,7 +170,6 @@ def main():
 
         try:
             jobs_data = fetch_jobs_from_api(api_key, query)
-            print(jobs_data)
             en = time.perf_counter()
             logger.info(f"Request {i} took {en - st:.2f}s")
 
@@ -146,4 +195,8 @@ def main():
 
 
 if __name__ == "__main__":
+    try:
+        clean_up_old_job_postings(30)
+    except Exception as e:
+        logger.error("Failed in cleaning up old job postings: {e}")
     main()
