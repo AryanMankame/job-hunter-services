@@ -32,6 +32,7 @@ async def resume_upload(
     file: UploadFile,
     email: str = Form(...)
 ):
+    print("Upload method called by : ",email)
     logger.info(
         f"Received upload request | File: {file.filename} | Email: {email}"
     )
@@ -90,20 +91,7 @@ async def resume_upload(
             status_code=422,
             detail="Unable to parse the resume. Please ensure the resume contains readable and complete information."
         )
-    # Save to MongoDB
-    try:
-        resume_id = resume_service.save_to_mongodb(
-            client,
-            email,
-            parsed_resume
-        )
-    except Exception:
-        logger.exception("Failed to save resume.")
-        raise HTTPException(
-            status_code=500,
-            detail="Unable to save the resume at the moment. Please try again later."
-        )
     return {
         "message": "Resume uploaded successfully.",
-        "resume_id": resume_id
+        "parsed_resume": parsed_resume
     }

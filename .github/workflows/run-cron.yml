@@ -24,8 +24,7 @@ jobs:
         MONGO_USERNAME: ${{secrets.MONGO_USERNAME}}
         MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
       run: |
-        cd cronjob
-        python3 fetch_jobs.py
+        python3 -m cronjob.fetch_jobs
 
 
 

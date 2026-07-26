@@ -1,7 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
-from locations import roles, locations
+from cronjob.locations import roles, locations
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 import hashlib
@@ -9,8 +9,9 @@ import datetime
 import logging
 import time
 from concurrent.futures import ThreadPoolExecutor
-from Jobprocessor import JobPreprocessor
+from cronjob.Jobprocessor import JobPreprocessor
 from jobMatch.calculate_skills_score import SkillsMatcher
+import math
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -75,7 +76,7 @@ def insert_jobs_into_mongodb(job):
             {"$set": processed_job},
             upsert=True
         )
-
+        insert_job_into_users_match(processed_job)
         if result.upserted_id:
             logger.info(f"✓ Inserted job: {job.get('job_title')} at {job.get('employer_name')}")
         else:
@@ -123,14 +124,32 @@ def clean_up_old_job_postings(days: int = 30) -> int:
     logger.info(f"Removed {delete_result.deleted_count} expired job postings.")
     return delete_result.deleted_count
 
+def score_resume(resumeData, job) -> int:
+    try:
+        yoe_required_by_job = job.get('extracted').get('required_experience_years')
+        if yoe_required_by_job is not None and resumeData['total_experience_months'] >= yoe_required_by_job * 12:
+            years_score = 1
+        else:
+            years_score = 0
+        user_skills = resumeData['skills']
+        required_skills = job.get('extracted').get('required_skills')
+        nice_to_have_skills = job.get('extracted').get('nice_to_have_skills')
+        if user_skills is None or required_skills is None:
+            return 0
+        skills_score = skillmatcher.calculate_skills_score(user_skills,required_skills,nice_to_have_skills)['skills_score']
+        return math.ceil(50 * years_score + 50 * skills_score)
+    except Exception as e:
+        return 0
+
 def insert_job_into_users_match(job):
     """
     Insert job into already existing user
     """
     try:
-        users = users_collection.find({})
+        users = users_collection.find({}).to_list()
         for user in users:
-            if skillmatcher.calculate_skills_score(user['skills'],job['extracted']['required_skills'],job['extracted']['nice_to_have_skills']) > 50:
+            resume_score = score_resume(user['resume_data']['parsed_resume'],job)
+            if resume_score > 50:
                 users_collection.update_one({ "_id": user["_id"]}, {"$push": {"matches": job } })
     except PyMongoError as err:
         logger.error(f"Error inserting job into user: {err}")
@@ -162,7 +181,7 @@ def main():
     # Process queries
     st_t = time.perf_counter()
     total_jobs_fetched = 0
-    for i, query in enumerate(queries[:1]):
+    for i, query in enumerate(queries[1:]):
         st = time.perf_counter()
 
         # Alternate between API keys

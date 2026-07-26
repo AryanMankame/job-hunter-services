@@ -13,10 +13,4 @@ class ResumeService:
     def parse_resume(self,parser: ResumeDataParser,file_text: str) -> ResumeData:
         parsed_resume = parser.parse(file_text)
         return parsed_resume
-    def save_to_mongodb(self,client,email: str,parsed_resume: ResumeDataParser) -> str:
-        resp = client['jobHunter']['resumeData'].insert_one({
-            "email" : email,
-            "resume_data": parsed_resume.model_dump(mode="json")
-        })
-        return str(resp.inserted_id)
     
