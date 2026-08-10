@@ -10,8 +10,8 @@ import logging
 import time
 from concurrent.futures import ThreadPoolExecutor
 from cronjob.Jobprocessor import JobPreprocessor
-from jobMatch.calculate_skills_score import SkillsMatcher
-import math
+from common.skills import SkillsMatcher
+from common.scoring import score_resume
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -21,6 +21,8 @@ load_dotenv()
 API_URL = os.getenv("API_URL")
 API_KEY_ACC1 = os.getenv("API_KEY_ACC1")
 API_KEY_ACC2 = os.getenv("API_KEY_ACC2")
+API_KEY_ACC3 = os.getenv("API_KEY_ACC3")
+API_KEY_ACC4 = os.getenv("API_KEY_ACC4")
 MONGO_USERNAME = os.getenv("MONGO_USERNAME")
 MONGO_PASSWORD = os.getenv("MONGO_PASSWORD")
 
@@ -124,23 +126,6 @@ def clean_up_old_job_postings(days: int = 30) -> int:
     logger.info(f"Removed {delete_result.deleted_count} expired job postings.")
     return delete_result.deleted_count
 
-def score_resume(resumeData, job) -> int:
-    try:
-        yoe_required_by_job = job.get('extracted').get('required_experience_years')
-        if yoe_required_by_job is not None and resumeData['total_experience_months'] >= yoe_required_by_job * 12:
-            years_score = 1
-        else:
-            years_score = 0
-        user_skills = resumeData['skills']
-        required_skills = job.get('extracted').get('required_skills')
-        nice_to_have_skills = job.get('extracted').get('nice_to_have_skills')
-        if user_skills is None or required_skills is None:
-            return 0
-        skills_score = skillmatcher.calculate_skills_score(user_skills,required_skills,nice_to_have_skills)['skills_score']
-        return math.ceil(50 * years_score + 50 * skills_score)
-    except Exception as e:
-        return 0
-
 def insert_job_into_users_match(job):
     """
     Insert job into already existing user
@@ -148,9 +133,12 @@ def insert_job_into_users_match(job):
     try:
         users = users_collection.find({}).to_list()
         for user in users:
-            resume_score = score_resume(user['resume_data']['parsed_resume'],job)
+            resume_score = score_resume(user['resume_data']['parsed_resume'],job,skillmatcher)
             if resume_score > 50:
-                users_collection.update_one({ "_id": user["_id"]}, {"$push": {"matches": job } })
+                users_collection.update_one(
+                    {"_id": user["_id"], "matches.job_id": {"$ne": job["job_id"]}},
+                    {"$push": {"matches": job } },
+                )
     except PyMongoError as err:
         logger.error(f"Error inserting job into user: {err}")
 
@@ -185,8 +173,16 @@ def main():
         st = time.perf_counter()
 
         # Alternate between API keys
-        api_key = API_KEY_ACC1 if i % 2 == 0 else API_KEY_ACC2
-
+        api_key = ''
+        match (i%4):
+            case 0:
+                api_key = API_KEY_ACC1
+            case 1:
+                api_key = API_KEY_ACC2
+            case 2:
+                api_key = API_KEY_ACC3
+            case 3:
+                api_key = API_KEY_ACC4
         try:
             jobs_data = fetch_jobs_from_api(api_key, query)
             en = time.perf_counter()
