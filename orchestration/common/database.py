@@ -16,4 +16,18 @@ class DatabaseService:
     def find(self, query: dict, collection_name: str) -> list:
         collection = self.__db[collection_name]
         return collection.find_one(query)
-
+    def find_many(self, query: dict, collection_name: str) -> list:
+        collection = self.__db[collection_name]
+        return list(collection.find(query))
+    def create(self, item: dict, collection_name: str):
+        collection = self.__db[collection_name]
+        return collection.insert_one(item).inserted_id
+    def update(self, query: dict, collection_name: str, item: dict):
+        collection = self.__db[collection_name]
+        return collection.update_one(query, {"$set": item})
+    def update_many(self, query: dict, collection_name: str, item: dict):
+        collection = self.__db[collection_name]
+        return collection.update_many(query, {"$set": item})
+    def delete(self, query: dict, collection_name: str):
+        collection = self.__db[collection_name]
+        return collection.delete_one(query)

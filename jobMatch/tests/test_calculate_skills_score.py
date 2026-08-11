@@ -1,5 +1,5 @@
 import pytest
-from calculate_skills_score import SkillsMatcher
+from common.skills import SkillsMatcher
 
 matcher = SkillsMatcher()
 

@@ -1,0 +1,17 @@
+[project]
+name = "resume-upload"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "python-multipart",
+    "python-dotenv",
+    "pydantic",
+    "pypdf",
+    "langchain-openai",
+    "langchain-nvidia-ai-endpoints",
+    "langchain-core",
+]
+
+[tool.vercel]
+entrypoint = "app:app"

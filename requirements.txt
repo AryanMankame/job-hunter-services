@@ -1,6 +1,8 @@
 fastapi
 uvicorn
 pydantic
+requests
+requests-aws4auth
 python-dotenv
 python-multipart
 pymongo
@@ -21,3 +23,8 @@ langgraph-checkpoint
 langgraph-prebuilt
 langgraph-sdk
 langsmith
+mangum
+boto3
+supabase
+weasyprint
+jinja2

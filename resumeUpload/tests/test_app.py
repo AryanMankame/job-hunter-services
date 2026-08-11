@@ -59,23 +59,22 @@ class TestUploadValidation:
 
 class TestUploadHappyPath:
 
-    def test_successful_upload_returns_200_and_id(self, monkeypatch):
+    def test_successful_upload_returns_200_and_parsed_resume(self, monkeypatch):
         mock_service = Mock()
         mock_service.get_text_from_pdf.return_value = "extracted resume text"
-        mock_service.parse_resume.return_value = Mock()
-        mock_service.save_to_mongodb.return_value = "generated-id-123"
+        parsed_resume = {"full_name": "Jane Doe", "skills": ["python"]}
+        mock_service.parse_resume.return_value = parsed_resume
         monkeypatch.setattr(app_module, "resume_service", mock_service)
 
         resp = upload()
 
         assert resp.status_code == 200
         body = resp.json()
-        assert body["resume_id"] == "generated-id-123"
-        assert "success" in body["message"].lower()
+        assert body["message"] == "Resume uploaded successfully."
+        assert body["parsed_resume"] == parsed_resume
 
         mock_service.get_text_from_pdf.assert_called_once()
         mock_service.parse_resume.assert_called_once()
-        mock_service.save_to_mongodb.assert_called_once()
 
 
 class TestUploadFailurePaths:
@@ -91,9 +90,8 @@ class TestUploadFailurePaths:
 
         assert resp.status_code == 422
         assert "extract" in resp.json()["detail"].lower()
-        # parse/save should never be reached if extraction produced nothing
+        # parse should never be reached if extraction produced nothing
         mock_service.parse_resume.assert_not_called()
-        mock_service.save_to_mongodb.assert_not_called()
 
     def test_pdf_extraction_crash_returns_502(self, monkeypatch):
         mock_service = Mock()
@@ -113,15 +111,3 @@ class TestUploadFailurePaths:
         resp = upload()
 
         assert resp.status_code == 422
-        mock_service.save_to_mongodb.assert_not_called()
-
-    def test_mongo_save_failure_returns_502(self, monkeypatch):
-        mock_service = Mock()
-        mock_service.get_text_from_pdf.return_value = "valid extracted text"
-        mock_service.parse_resume.return_value = Mock()
-        mock_service.save_to_mongodb.side_effect = Exception("mongo down")
-        monkeypatch.setattr(app_module, "resume_service", mock_service)
-
-        resp = upload()
-
-        assert resp.status_code == 500

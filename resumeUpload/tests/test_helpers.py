@@ -1,5 +1,5 @@
 import pytest
-from helpers import verify_correct_email_format, ResumeParsingException
+from common.helpers import verify_correct_email_format, ResumeParsingException
 
 
 class TestVerifyCorrectEmailFormat:

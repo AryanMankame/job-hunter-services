@@ -11,4 +11,3 @@ class ResumeParsingException(Exception):
         super().__init__(status_code,message)
         self.message = message
         self.status_code = status_code
-    

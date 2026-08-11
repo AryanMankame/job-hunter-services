@@ -1,0 +1,15 @@
+[project]
+name = "generate-resume"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "python-dotenv",
+    "requests",
+    "requests-aws4auth",
+    "boto3",
+]
+
+[tool.vercel]
+entrypoint = "app:app"

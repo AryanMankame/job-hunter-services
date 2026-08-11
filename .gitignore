@@ -1,7 +1,9 @@
 *__pycache__
-.env
+*.env*
 *.pyc
 *pytest_cache*
 *egg-info
 .DS_Store
 *.vscode
+*.playwright-mcp*
+.dockerignore

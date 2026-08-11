@@ -1,23 +1,15 @@
 from fastapi import FastAPI, UploadFile, HTTPException, Form
+try:
+    from mangum import Mangum
+except ImportError:  # non-Lambda platforms (e.g. Vercel) run FastAPI's ASGI `app` directly
+    Mangum = None
 from ResumeDataParser import ResumeDataParser
 from ResumeService import ResumeService
-from pymongo import MongoClient
-from helpers import verify_correct_email_format, ResumeParsingException
-from dotenv import load_dotenv
+from common.helpers import verify_correct_email_format, ResumeParsingException
 import logging
-import os
-
-load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-username = os.getenv("MONGO_USERNAME")
-password = os.getenv("MONGO_PASSWORD")
-
-client = MongoClient(
-    f"mongodb+srv://{username}:{password}@cluster0.tqm8j4u.mongodb.net/?appName=Cluster0"
-)
 
 parser = ResumeDataParser()
 resume_service = ResumeService()
@@ -95,3 +87,6 @@ async def resume_upload(
         "message": "Resume uploaded successfully.",
         "parsed_resume": parsed_resume
     }
+
+if Mangum is not None:
+    handler = Mangum(app)

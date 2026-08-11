@@ -1,5 +1,6 @@
 from pypdf import PdfReader
-from ResumeDataParser import ResumeDataParser, ResumeData
+from ResumeDataParser import ResumeDataParser
+from common.models import ResumeData
 import io
 
 class ResumeService:
