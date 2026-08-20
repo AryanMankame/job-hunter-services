@@ -1,4 +1,5 @@
 from unittest.mock import Mock
+import sys
 
 from orchestration import app as app_module
 from orchestration import ws_handler
@@ -70,7 +71,16 @@ class TestPushToUser:
 class TestLambdaHandlerDispatch:
     def test_ws_event_routes_to_ws_handler(self, monkeypatch):
         mock_db = Mock()
-        monkeypatch.setattr(ws_handler, "database_service", mock_db)
+        # app.py may import handle_ws_event from either the top-level ws_handler
+        # module or orchestration.ws_handler depending on how it was loaded;
+        # patch whichever module object(s) exist so the real DB is never hit.
+        patched_any = False
+        for mod_name in ("ws_handler", "orchestration.ws_handler"):
+            mod = sys.modules.get(mod_name)
+            if mod is not None:
+                monkeypatch.setattr(mod, "database_service", mock_db)
+                patched_any = True
+        assert patched_any
 
         result = app_module.lambda_handler(connect_event(), None)
 

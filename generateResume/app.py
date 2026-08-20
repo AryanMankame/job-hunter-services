@@ -16,12 +16,16 @@ load_dotenv()
 app = FastAPI()
 
 LAMBDA_FUNCTION_NAME = os.getenv("LAMBDA_FUNCTION_NAME", "generateResumeWorker")
-AWS_REGION = os.getenv("AWS_REGION", "ap-south-1")
+AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
 WORKER_FUNCTION_URL = os.getenv("WORKER_FUNCTION_URL", "").rstrip("/")
 
 
 def _aws4_auth() -> AWS4Auth:
-    creds = boto3.Session().get_credentials()
+    creds = boto3.Session(
+        aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+        aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+        region_name=AWS_REGION,
+    ).get_credentials()
     if creds is None:
         raise RuntimeError("No AWS credentials available to sign the worker request.")
     frozen = creds.get_frozen_credentials()

@@ -5,6 +5,9 @@ try:
 except ImportError:  # non-Lambda platforms (e.g. Vercel) run FastAPI's ASGI `app` directly
     Mangum = None
 from common.database import DatabaseService
+from common.helpers import verify_correct_email_format
+from common.scoring import score_resume
+from common.skills import SkillsMatcher
 from pydantic import BaseModel
 from typing import Optional
 from bson import json_util
@@ -23,21 +26,25 @@ except ImportError:
 
 try:
     from billing import (
-        PLANS,
         can_generate,
-        create_subscription_session,
         get_entitlement,
-        handle_webhook_event,
+        PLANS,
+        RazorpayError,
+        create_subscription_session,
+        cancel_subscription,
         verify_webhook_signature,
+        handle_webhook_event,
     )
 except ImportError:
     from orchestration.billing import (
-        PLANS,
         can_generate,
-        create_subscription_session,
         get_entitlement,
-        handle_webhook_event,
+        PLANS,
+        RazorpayError,
+        create_subscription_session,
+        cancel_subscription,
         verify_webhook_signature,
+        handle_webhook_event,
     )
 
 load_dotenv()
@@ -64,14 +71,20 @@ app.add_middleware(
 )
 
 database_service = DatabaseService()
+skillmatcher = SkillsMatcher()
 
 RESUME_SERVICE_URL = os.getenv("RESUME_SERVICE_URL", "http://127.0.0.1:8001")
-JOB_MATCH_SERVICE_URL = os.getenv("JOB_MATCH_SERVICE_URL", "http://127.0.0.1:8002")
 GENERATE_RESUME_SERVICE_URL = os.getenv(
     "GENERATE_RESUME_SERVICE_URL", "http://127.0.0.1:8003"
 )
 CALLBACK_SECRET = os.getenv("CALLBACK_SECRET", "")
-GENERATION_TIMEOUT_MIN = int(os.getenv("GENERATION_TIMEOUT_MIN", "10"))
+
+# Master switch for paid checkout (Razorpay). Only "true" enables subscriptions.
+PAYMENTS_ENABLED = os.getenv("PAYMENTS_ENABLED", "").lower() == "true"
+
+# How long a `pending` generation record may sit before being swept to `failed`
+# when the worker never calls back.
+GENERATION_TIMEOUT_MIN = 15
 
 
 class GenerateResumeRequest(BaseModel):
@@ -190,35 +203,110 @@ async def upload_resume(file: UploadFile, email: str = Form(...)):
 @app.post("/jobMatch")
 async def job_match(email: str = Body(..., embed=True)):
     try:
+        if not verify_correct_email_format(email):
+            raise HTTPException(status_code=400, detail="Invalid email format")
         user_data = database_service.find({"email": email}, "resumeData")
         if not user_data:
             raise HTTPException(status_code=404, detail="No resume found for user.")
-        id = user_data["_id"]
-        job_matches = []
-        if "matches" not in user_data.keys():
+
+        existing_count = database_service.count({"email": email}, "matches")
+        if existing_count == 0:
+            resume_data = user_data["resume_data"]["parsed_resume"]
             jobs = database_service.find_many({}, "jobData")
+            job_matches = []
             for job in jobs:
-                job["_id"] = str(job["_id"])
-            async with httpx.AsyncClient(timeout=60) as client:
-                resp = await client.post(
-                    f"{JOB_MATCH_SERVICE_URL}/findMatches",
-                    json={
-                        "email": email,
-                        "resumeData": user_data["resume_data"]["parsed_resume"],
-                        "jobs": jobs,
-                    },
-                )
-                if resp.status_code == 200:
-                    job_matches = resp.json()
-                    user_data["matches"] = job_matches["filtered_list"]
-                    database_service.insert(user_data, "resumeData", {"_id": id})
+                score = score_resume(resume_data, job, skillmatcher)
+                if score > 50:
+                    job_matches.append({"job_id": str(job["_id"]), "score": score})
+            database_service.bulk_upsert_matches(email, job_matches)
         else:
-            job_matches = user_data["matches"]
+            matches = database_service.find_many(
+                {"email": email},
+                "matches",
+                projection={"job_id": 1, "score": 1},
+                sort=[("score", -1)],
+            )
+            job_matches = [
+                {"job_id": m["job_id"], "score": m.get("score", 0)} for m in matches
+            ]
         return {"jobs": job_matches}
     except HTTPException:
         raise
     except Exception as e:
         logger.exception("Unexpected error while processing the request.")
+        raise HTTPException(status_code=500, detail="Job matching failed.")
+
+
+@app.get("/jobs")
+async def get_jobs(
+    email: str,
+    page: int = 1,
+    page_size: int = 20,
+):
+    try:
+        if not verify_correct_email_format(email):
+            raise HTTPException(status_code=400, detail="Invalid email format")
+        if page < 1:
+            page = 1
+        page_size = max(1, min(page_size, 100))
+
+        # Matches live in their own collection ({email, job_id, score}), so this
+        # never touches the multi-MB `matches` array embedded in resumeData.
+        total = database_service.count({"email": email}, "matches")
+        if total == 0:
+            # No matches persisted yet -> the frontend triggers /jobMatch and retries.
+            raise HTTPException(status_code=404, detail="No matches found for user.")
+
+        start = (page - 1) * page_size
+        matches = database_service.find_many(
+            {"email": email},
+            "matches",
+            projection={"job_id": 1, "score": 1},
+            sort=[("score", -1)],
+            skip=start,
+            limit=page_size,
+        )
+        has_more = start + len(matches) < total
+
+        resolved = []
+        if matches:
+            object_ids = [
+                ObjectId(m["job_id"])
+                for m in matches
+                if ObjectId.is_valid(m.get("job_id", ""))
+            ]
+            jobs = (
+                database_service.find_many(
+                    {"_id": {"$in": object_ids}},
+                    "jobData",
+                    {"raw_description": 0},
+                )
+                if object_ids
+                else []
+            )
+            jobs_by_key = {str(job["_id"]): job for job in jobs}
+
+            for m in matches:
+                job = jobs_by_key.get(str(m["job_id"]))
+                if job is None:
+                    continue
+                job["_id"] = str(job["_id"])
+                if isinstance(job.get("posted_at"), datetime):
+                    job["posted_at"] = job["posted_at"].isoformat()
+                job["score"] = m.get("score", 0)
+                resolved.append(job)
+
+        return {
+            "jobs": resolved,
+            "meta": {"total": total},
+            "total": total,
+            "has_more": has_more,
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Unexpected error while processing the request.")
+        raise HTTPException(status_code=500, detail="Could not load jobs.")
 
 
 @app.post("/generateResume")
@@ -231,19 +319,16 @@ async def generate_resume(request: GenerateResumeRequest):
         if not user_data:
             raise HTTPException(status_code=404, detail="No resume found for user.")
 
+        usage = can_generate(database_service, email)
+        if not usage.get("allowed", False):
+            raise HTTPException(
+                status_code=402,
+                detail={"usage": usage},
+            )
+
         job_data = database_service.find({"job_id": job_id}, "jobData")
         if not job_data:
             raise HTTPException(status_code=404, detail="Job not found.")
-
-        usage = can_generate(database_service, email)
-        if not usage["allowed"]:
-            raise HTTPException(
-                status_code=402,
-                detail={
-                    "message": "You've reached your generation limit. Upgrade your plan to generate more resumes.",
-                    "usage": usage,
-                },
-            )
 
         parsed_resume = user_data["resume_data"]["parsed_resume"]
         job_title = job_data.get("title") or job_data.get("company")
@@ -355,16 +440,12 @@ async def generate_resume_callback(request: Request, body: GenerateResumeCallbac
 def list_generated_resumes(email: str):
     cutoff = (datetime.utcnow() - timedelta(minutes=GENERATION_TIMEOUT_MIN)).isoformat()
     database_service.update_many(
-        {
-            "email": email,
-            "status": "pending",
-            "created_at": {"$lt": cutoff},
-        },
+        {"email": email, "status": "pending", "created_at": {"$lt": cutoff}},
         "generatedResumes",
         {
             "status": "failed",
-            "error": "Generation timed out",
             "updated_at": datetime.utcnow().isoformat(),
+            "error": "Generation timed out",
         },
     )
     records = database_service.find_many({"email": email}, "generatedResumes")
@@ -374,87 +455,90 @@ def list_generated_resumes(email: str):
     return {"resumes": records}
 
 
-# ─── Subscription & billing endpoints ────────────────────────────────────────
+@app.get("/usage")
+def get_usage(email: str):
+    try:
+        if not verify_correct_email_format(email):
+            raise HTTPException(status_code=400, detail="Invalid email format")
+        return get_entitlement(database_service, email)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Unexpected error while processing the request.")
+        raise HTTPException(status_code=500, detail="Could not load usage.")
 
 
 @app.get("/plans")
 def list_plans():
-    return {"plans": list(PLANS.values())}
-
-
-@app.get("/usage")
-def current_usage(email: str):
     try:
-        return get_entitlement(database_service, email)
-    except Exception:
-        logger.exception("Failed to fetch usage for %s", email)
-        raise HTTPException(status_code=500, detail="Failed to fetch usage.")
-
-
-class CreateSubscriptionRequest(BaseModel):
-    email: str
-    plan: str
+        plans = [dict(plan) for plan in PLANS.values()]
+        return {"plans": plans}
+    except Exception as e:
+        logger.exception("Unexpected error while processing the request.")
+        raise HTTPException(status_code=500, detail="Could not load plans.")
 
 
 @app.post("/subscription/create")
-async def create_subscription(request: CreateSubscriptionRequest):
+async def create_subscription(email: str = Body(...), plan: str = Body(...)):
     try:
-        # Prevent double-billing if a paid subscription is still active.
-        current = get_entitlement(database_service, request.email)
-        if current["plan"] != "free":
+        if not PAYMENTS_ENABLED:
             raise HTTPException(
-                status_code=409,
-                detail={
-                    "message": "You already have an active subscription.",
-                    "usage": current,
-                },
+                status_code=503,
+                detail={"message": "Paid plans are not available right now."},
             )
-        session = await create_subscription_session(
-            database_service, request.email, request.plan
-        )
-        return {"checkout": session, "key_id": os.getenv("RAZORPAY_KEY_ID")}
+        if not verify_correct_email_format(email):
+            raise HTTPException(status_code=400, detail={"message": "Invalid email format"})
+        checkout = await create_subscription_session(database_service, email, plan)
+        key_id = os.getenv("RAZORPAY_KEY_ID", "")
+        if not key_id:
+            raise HTTPException(
+                status_code=500, detail={"message": "Razorpay is not configured."}
+            )
+        return {"checkout": checkout, "key_id": key_id}
+    except RazorpayError as e:
+        logger.warning("Subscription create failed: %s", e)
+        raise HTTPException(status_code=400, detail={"message": str(e)})
     except HTTPException:
         raise
-    except Exception as err:
-        logger.exception("Failed to create subscription for %s", request.email)
-        raise HTTPException(status_code=500, detail=str(err))
+    except Exception as e:
+        logger.exception("Unexpected error while processing the request.")
+        raise HTTPException(
+            status_code=500, detail={"message": "Could not start checkout."}
+        )
 
 
 @app.post("/subscription/cancel")
-async def cancel_subscription(email: str = Body(..., embed=True)):
+async def cancel_subscription_endpoint(email: str = Body(..., embed=True)):
     try:
-        sub = database_service.find({"email": email}, "subscriptions")
-        if not sub:
-            raise HTTPException(status_code=404, detail="No subscription found.")
-        database_service.update(
-            {"email": email},
-            "subscriptions",
-            {"status": "cancelled", "updated_at": datetime.utcnow().isoformat()},
-        )
-        return {"ok": True}
+        if not verify_correct_email_format(email):
+            raise HTTPException(status_code=400, detail={"message": "Invalid email format"})
+        return await cancel_subscription(database_service, email)
+    except RazorpayError as e:
+        logger.warning("Subscription cancel failed: %s", e)
+        raise HTTPException(status_code=400, detail={"message": str(e)})
     except HTTPException:
         raise
-    except Exception:
-        logger.exception("Failed to cancel subscription for %s", email)
-        raise HTTPException(status_code=500, detail="Failed to cancel subscription.")
+    except Exception as e:
+        logger.exception("Unexpected error while processing the request.")
+        raise HTTPException(
+            status_code=500, detail={"message": "Could not cancel subscription."}
+        )
 
 
-@app.post("/subscription/webhook")
-async def subscription_webhook(request: Request):
-    body_bytes = await request.body()
-    signature = request.headers.get("x-razorpay-signature", "")
-    if not verify_webhook_signature(body_bytes, signature):
-        raise HTTPException(status_code=400, detail="Invalid webhook signature.")
+@app.post("/razorpay/webhook")
+async def razorpay_webhook(request: Request):
     try:
-        event = json.loads(body_bytes)
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid JSON body.")
-    try:
-        result = handle_webhook_event(database_service, event)
-    except Exception:
-        logger.exception("Webhook handling failed.")
+        body_bytes = await request.body()
+        signature = request.headers.get("X-Razorpay-Signature")
+        if not verify_webhook_signature(body_bytes, signature):
+            raise HTTPException(status_code=401, detail="Invalid signature.")
+        event = json.loads(body_bytes.decode("utf-8"))
+        return handle_webhook_event(database_service, event)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.exception("Unexpected error while processing the request.")
         raise HTTPException(status_code=500, detail="Webhook processing failed.")
-    return result
 
 
 if Mangum is not None:

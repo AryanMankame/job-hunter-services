@@ -20,9 +20,9 @@ dependencies = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["resumeUpload*","jobMatch*","common*","orchestration*","generateResume*"]
+include = ["resumeUpload*","common*","orchestration*","generateResume*"]
 
 [tool.pytest.ini_options]
-testpaths = ["jobMatch/tests", "resumeUpload/tests", "orchestration/tests", "generateResume/tests"]
-pythonpath = [".", "jobMatch", "resumeUpload"]
+testpaths = ["resumeUpload/tests", "orchestration/tests", "generateResume/tests"]
+pythonpath = [".", "resumeUpload"]
 addopts = ["--import-mode=importlib"]

@@ -1,9 +1,10 @@
 """Subscription billing, quotas, and Razorpay integration.
 
 Plans (paid monthly, Indian Rupees via Razorpay which supports card + UPI):
-  - free      : 2 one-time resume generations
-  - pro       : 30 generations / 30 days
-  - unlimited : 100 generations / 30 days
+  - free     : 2 one-time resume generations
+  - starter  : 20 generations / 30 days
+  - pro      : 100 generations / 30 days
+  - advanced : 250 generations / 30 days
 
 Quota usage is computed from the `generatedResumes` collection so it is
 idempotent and survives worker failures (failed runs never consume quota).
@@ -20,25 +21,48 @@ import httpx
 
 FREE_GENERATIONS = 2
 
+# Razorpay requires total_count >= 1 and caps subscriptions at 100 years.
+# 1200 monthly cycles = 100 years, effectively auto-recurring until cancelled.
+MAX_SUBSCRIPTION_CYCLES = 1200
+
 PLANS = {
+    "free" : {
+        "id": "free",
+        "name": "Free",
+        "amount_paise": 0,
+        "currency": "INR",
+        "interval": 30,
+        "generations": FREE_GENERATIONS,
+        "description": "2 resume generations every 30 days",
+    },
+    "starter": {
+        "id": "starter",
+        "name": "Starter",
+        "amount_paise": 9900,  # ₹99.00
+        "currency": "INR",
+        "interval": 30,  # days
+        "generations": 20,
+        "description": "20 resume generations every 30 days",
+    },
     "pro": {
         "id": "pro",
         "name": "Pro",
-        "amount_paise": 49900,  # ₹499.00
-        "currency": "INR",
-        "interval": 30,  # days
-        "generations": 30,
-        "description": "30 resume generations every 30 days",
-    },
-    "unlimited": {
-        "id": "unlimited",
-        "name": "Unlimited",
-        "amount_paise": 99900,  # ₹999.00
+        "amount_paise": 39900,  # ₹399.00
         "currency": "INR",
         "interval": 30,
         "generations": 100,
         "description": "100 resume generations every 30 days",
     },
+    "advanced" : {
+        "id": "advanced",
+        "name": "Advanced",
+        "amount_paise": 79900,  # ₹799.00
+        "currency": "INR",
+        "interval": 30,
+        "generations": 250,
+        "description": "250 resume generations every 30 days",
+    }
+
 }
 
 
@@ -187,8 +211,8 @@ async def create_subscription_session(database_service, email: str, plan_id: str
             "/subscriptions",
             {
                 "plan_id": rzp_plan_id,
-                "customer_notify": 1,
-                "total_count": 0,  # auto-recurring until cancelled
+                "customer_notify": True,
+                "total_count": MAX_SUBSCRIPTION_CYCLES,
                 "notes": {"email": email, "plan": plan_id},
             },
         )
@@ -220,6 +244,43 @@ async def create_subscription_session(database_service, email: str, plan_id: str
     }
 
 
+async def cancel_subscription(database_service, email: str) -> dict:
+    """Cancel the user's Razorpay subscription at the end of the billing cycle.
+
+    The user keeps access until `period_end` (see `get_entitlement`), and the
+    record is marked `cancelled` so the webhook/entitlement logic stays simple.
+    """
+    sub = database_service.find({"email": email}, "subscriptions")
+    if not sub or not sub.get("razorpay_subscription_id"):
+        raise RazorpayError("No active subscription found for user.")
+
+    rzp_id = sub["razorpay_subscription_id"]
+    async with httpx.AsyncClient(
+        base_url=RAZORPAY_BASE, auth=_auth(), timeout=30.0
+    ) as client:
+        try:
+            await _rzp_post(
+                client,
+                f"/subscriptions/{rzp_id}/cancel",
+                {"cancel_at_cycle_end": True},
+            )
+        except RazorpayError:
+            # Subscription may already be inactive at Razorpay; still mirror the
+            # local state so the user sees the cancellation take effect.
+            pass
+
+    database_service.update(
+        {"email": email},
+        "subscriptions",
+        {"status": "cancelled", "updated_at": _now()},
+    )
+    return {
+        "cancelled": True,
+        "plan": sub.get("plan"),
+        "ends_at": sub.get("period_end"),
+    }
+
+
 def verify_webhook_signature(body_bytes: bytes, signature: Optional[str]) -> bool:
     secret = os.getenv("RAZORPAY_WEBHOOK_SECRET", "")
     if not secret or not signature:
@@ -229,11 +290,14 @@ def verify_webhook_signature(body_bytes: bytes, signature: Optional[str]) -> boo
 
 
 def _match_plan(keyword: str) -> Optional[str]:
-    low = keyword.lower()
-    if "unlimited" in low:
-        return "unlimited"
-    if "pro" in low or "jobhunter-pro" in low:
-        return "pro"
+    low = keyword.lower().strip()
+    if low.startswith("jobhunter-"):
+        candidate = low[len("jobhunter-"):]
+        if is_paid_plan(candidate):
+            return candidate
+    for plan_id in PLANS:
+        if plan_id in low:
+            return plan_id
     return None
 
 
@@ -247,7 +311,7 @@ def _find_subscription(database_service, email: Optional[str], rzp_sub_id: Optio
     return None
 
 
-async def _activate(
+def _activate(
     database_service,
     record: Optional[dict],
     email: Optional[str],

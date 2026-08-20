@@ -32,6 +32,7 @@ client = MongoClient(
 db = client['jobHunter']
 jobs_collection = db['jobData']
 users_collection = db['resumeData']
+matches_collection = db['matches']
 skillmatcher = SkillsMatcher()
 
 def fetch_jobs_from_api(api_key, querystring):
@@ -93,34 +94,32 @@ def insert_jobs_into_mongodb(job):
 def clean_up_old_job_postings(days: int = 30) -> int:
     """
     Delete job postings older than `days` and remove their references
-    from every user's matches list.
+    from the matches collection.
+
+    Matches reference a job by its `jobData._id` string (`job_id` field in the
+    matches collection). Some legacy references may still hold the network
+    `job_id` (jobData `job_id` field), so we remove by both forms.
     """
     cutoff = datetime.datetime.now() - datetime.timedelta(days=days)
-    old_job_ids = list(
+    old_jobs = list(
         jobs_collection.find(
             {"preprocessed_at": {"$lt": cutoff}},
-            {"job_id": 1, "_id": 0},
+            {"job_id": 1, "_id": 1},
         )
     )
-    if not old_job_ids:
+    if not old_jobs:
         logger.info("No expired job postings found.")
         return 0
-    job_ids = [job["job_id"] for job in old_job_ids]
+    job_id_fields = [job["job_id"] for job in old_jobs if job.get("job_id")]
+    ref_keys = list(job_id_fields) + [str(job["_id"]) for job in old_jobs]
     with client.start_session() as session:
         with session.start_transaction():
             delete_result = jobs_collection.delete_many(
-                {"job_id": {"$in": job_ids}},
+                {"job_id": {"$in": job_id_fields}},
                 session=session,
             )
-            users_collection.update_many(
-                {},
-                {
-                    "$pull": {
-                        "matches": {
-                            "job_id": {"$in": job_ids}
-                        }
-                    }
-                },
+            matches_collection.delete_many(
+                {"job_id": {"$in": ref_keys}},
                 session=session,
             )
     logger.info(f"Removed {delete_result.deleted_count} expired job postings.")
@@ -128,16 +127,21 @@ def clean_up_old_job_postings(days: int = 30) -> int:
 
 def insert_job_into_users_match(job):
     """
-    Insert job into already existing user
+    Insert job into already existing user's matches collection.
     """
     try:
+        job_ref = jobs_collection.find_one({"job_id": job["job_id"]}, {"_id": 1})
+        if not job_ref:
+            return
+        job_data_id = str(job_ref["_id"])
         users = users_collection.find({}).to_list()
         for user in users:
-            resume_score = score_resume(user['resume_data']['parsed_resume'],job,skillmatcher)
+            resume_score = score_resume(user['resume_data']['parsed_resume'], job, skillmatcher)
             if resume_score > 50:
-                users_collection.update_one(
-                    {"_id": user["_id"], "matches.job_id": {"$ne": job["job_id"]}},
-                    {"$push": {"matches": job } },
+                matches_collection.update_one(
+                    {"email": user["email"], "job_id": job_data_id},
+                    {"$set": {"email": user["email"], "job_id": job_data_id, "score": resume_score}},
+                    upsert=True,
                 )
     except PyMongoError as err:
         logger.error(f"Error inserting job into user: {err}")

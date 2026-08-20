@@ -1,7 +1,0 @@
-import os
-
-os.environ.setdefault("NVIDIA_API_KEY", "test-nvidia-key")
-os.environ.setdefault("OPENROUTER_API_KEY", "test-openrouter-key")
-os.environ.setdefault("OPENAI_API_KEY", "test-openrouter-key")
-os.environ.setdefault("MONGO_USERNAME", "test-user")
-os.environ.setdefault("MONGO_PASSWORD", "test-pass")

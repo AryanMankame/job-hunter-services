@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 REGION = "us-east-1"
-FUNCTION_URL = "https://kup4ccnttbuz76jt3yml6h5la40drpxs.lambda-url.us-east-1.on.aws/"
+FUNCTION_URL = "https://2x3iuhz25ypelfvcple45ka7oe0rzyka.lambda-url.us-east-1.on.aws/"
 
 session = boto3.Session(
     aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
@@ -24,7 +24,7 @@ auth = AWS4Auth(
     session_token=credentials.token,
 )
 
-response = requests.get(FUNCTION_URL, auth=auth)
+response = requests.post(FUNCTION_URL, auth=auth)
 
 print("Status:", response.status_code)
 print("Body:", response.text)
