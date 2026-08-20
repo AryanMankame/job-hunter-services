@@ -215,7 +215,7 @@ def main():
 
 if __name__ == "__main__":
     try:
-        clean_up_old_job_postings(30)
+        clean_up_old_job_postings(10)
     except Exception as e:
         logger.error("Failed in cleaning up old job postings: {e}")
     main()
